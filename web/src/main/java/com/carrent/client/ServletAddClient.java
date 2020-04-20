@@ -1,8 +1,9 @@
 package com.carrent.client;
 
-import com.prokat.entity.Client;
-import com.prokat.service.ClientService;
-import com.sun.security.ntlm.Client;
+
+import com.carrent.Client;
+import com.carrent.ClientService;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,8 +18,7 @@ public class ServletAddClient extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-            req.getServletContext()
-                    .getRequestDispatcher("/WEB-INF/jsp/client/register.jsp")
+        req.getRequestDispatcher("/WEB-INF/jsp/client/register.jsp")
                     .forward(req, resp);
     }
 

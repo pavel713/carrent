@@ -1,7 +1,4 @@
 package com.carrent.car;
-
-
-
 import com.carrent.Car;
 import com.carrent.CarsService;
 

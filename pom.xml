@@ -7,18 +7,22 @@
     <groupId>com.carrent</groupId>
     <artifactId>carrent</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
     <modules>
         <module>entities</module>
         <module>dao</module>
         <module>service</module>
         <module>web</module>
     </modules>
-<packaging>pom</packaging>
+
     <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
     </properties>
+
 
     <dependencies>
         <dependency>
@@ -27,26 +31,23 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.40</version>
         </dependency>
+
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>5.4.13.Final</version>
         </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.16.22</version>
-        </dependency>
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.4.195</version>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -55,37 +56,27 @@
             <plugins>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-checkstyle-plugin</artifactId>
-                    <version>3.1.1</version>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.5.1</version>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>2.0.2</version>
-                    <configuration>
-                        <source>1.6</source>
-                        <target>1.6</target>
-                        <encoding>UTF-8</encoding>
-                    </configuration>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>3.1.1</version>
+
                 </plugin>
                 <plugin>
                     <artifactId>maven-clean-plugin</artifactId>
                     <version>3.1.0</version>
                 </plugin>
 
-                <plugin>
-                    <artifactId>maven-resources-plugin</artifactId>
-                    <version>3.0.2</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.8.0</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.22.1</version>
-                </plugin>
-                <plugin>
+
+
+                        <plugin>
                     <artifactId>maven-jar-plugin</artifactId>
                     <version>3.0.2</version>
                 </plugin>
@@ -102,11 +93,7 @@
                     <artifactId>maven-site-plugin</artifactId>
                     <version>3.7.1</version>
                 </plugin>
-                <plugin>
-                    <artifactId>maven-project-info-reports-plugin</artifactId>
-                    <version>3.0.0</version>
-                </plugin>
-                <plugin>
+                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>cobertura-maven-plugin</artifactId>
                     <executions>
