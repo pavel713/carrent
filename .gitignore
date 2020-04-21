@@ -2,7 +2,9 @@ out
 .settings
 .idea
 .iml
+.idea
 lib
+
 
 service/target/
 dao/target/
