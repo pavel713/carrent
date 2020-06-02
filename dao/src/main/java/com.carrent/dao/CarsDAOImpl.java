@@ -1,7 +1,7 @@
 package com.carrent.dao;
 
 import com.carrent.Car;
-import com.carrent.connection.ConnectionManager;
+import com.carrent.configuration.ConnectionManager;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

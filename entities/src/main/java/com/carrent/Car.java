@@ -34,10 +34,9 @@ public class Car extends BaseEntity{
     @Column(name = "price")
     private int price;
 
-    public Car() {
+    public Car(String model, String color, boolean rented, String plate_num, int year, int price) {
+        super();
     }
-
-
 
 
 //    public long getId() {

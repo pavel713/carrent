@@ -1,7 +1,7 @@
 package com.carrent.dao;
 
 import com.carrent.Client;
-import com.carrent.connection.ConnectionManager;
+import com.carrent.configuration.ConnectionManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

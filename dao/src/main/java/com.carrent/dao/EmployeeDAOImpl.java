@@ -2,7 +2,7 @@ package com.carrent.dao;
 
 import com.carrent.Contract;
 import com.carrent.Employee;
-import com.carrent.connection.ConnectionManager;
+import com.carrent.configuration.ConnectionManager;
 
 
 import java.sql.Connection;
