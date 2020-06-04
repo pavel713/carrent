@@ -1,9 +1,6 @@
 package com.carrent;
 
 
-import com.carrent.dao.ClientDAO;
-import com.carrent.dao.ClientDAOImpl;
-
 import java.util.List;
 
 

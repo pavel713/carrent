@@ -25,35 +25,7 @@
 
 
     <dependencies>
-        <!--HIBERNATE-->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>5.4.16.Final</version>
-        </dependency>
 
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>5.4.16.Final</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>5.4.3.Final</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-c3p0</artifactId>
-            <version>5.4.16.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.4.195</version>
-        </dependency>
 
         <dependency>
             <groupId>junit</groupId>
@@ -89,7 +61,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.16.16</version>
+            <version>1.18.12</version>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>
@@ -128,11 +100,6 @@
             <version>4.3.8.RELEASE</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>4.3.8.RELEASE</version>
-        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>

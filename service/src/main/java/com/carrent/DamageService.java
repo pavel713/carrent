@@ -1,9 +1,6 @@
 package com.carrent;
 
 
-import com.carrent.dao.DamageDAO;
-import com.carrent.dao.DamageDAOImpl;
-
 import java.sql.SQLException;
 import java.util.List;
 

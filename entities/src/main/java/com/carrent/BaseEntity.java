@@ -1,21 +1,27 @@
 package com.carrent;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import java.io.Serializable;
 
-@Getter
-@Setter
+
 @NoArgsConstructor
 @MappedSuperclass
-public abstract class BaseEntity {
+@ToString
+@EqualsAndHashCode
+public abstract class BaseEntity implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    @Getter
+    @Setter
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
+    protected int id;
 
 }

@@ -1,57 +1,41 @@
 package com.carrent;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
-public class Employee {
-    private long id;
+@NoArgsConstructor
+@Entity
+@Table(name = "employee")
+public class Employee extends BaseEntity{
+
+
+
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Getter
+    @Setter
+    @Column(name = "name")
     private String name;
-    private int phone;
 
-    public long getId() {
-        return id;
-    }
+    @Getter
+    @Setter
+    @Column(name = "phone")
+    private String phone;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    @OneToMany(mappedBy = "employee")
+    @Getter
+    @Setter
+    private Set<Contract> contracts = new HashSet<>();
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
-    public int getPhone() {
-        return phone;
-    }
-
-    public void setPhone(int phone) {
-        this.phone = phone;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Employee employee = (Employee) o;
-        return id == employee.id &&
-                phone == employee.phone &&
-                Objects.equals(name, employee.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, phone);
-    }
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", phone=" + phone +
-                '}';
-    }
 }

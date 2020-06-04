@@ -11,12 +11,10 @@ import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-
-
-
 @Configuration
 @ComponentScan("com.carrent.dao")
 @PropertySource("classpath:config.properties")
+
 public class ConfigurationDAO {
 
     @Resource
@@ -38,7 +36,7 @@ public class ConfigurationDAO {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("com.carrent.entities");
+        sessionFactory.setPackagesToScan("com.carrent.dao");
         sessionFactory.setHibernateProperties(getHibernateProperties());
 
         return sessionFactory;

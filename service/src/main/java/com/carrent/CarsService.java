@@ -1,46 +1,27 @@
 package com.carrent;
 
 
-import com.carrent.dao.CarsDAOImpl;
+import com.carrent.dao.CarDAO;
 
-import java.util.List;
 
-public class CarsService {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
-    private static final String FIND_CAR = "SELECT * FROM cars where model = ?";
-    private static final String DELETE_CAR = "DELETE FROM cars WHERE (id) VALUES (?)";
-    private static CarsService INSTANCE = null;
 
-    private CarsService() {
-    }
+@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
+public class CarsService extends BaseService<Car> {
 
-    public static CarsService getInstance() {
-        if (INSTANCE == null) {
-            synchronized (CarsService.class) {
-                if (INSTANCE == null) {
-                    INSTANCE = new CarsService();
-                }
-            }
-        }
-        return INSTANCE;
-    }
+    @Autowired
+    private CarDAO carDAO;
 
-    public void getById(int id) {
-        CarsDAOImpl.getInstance().getById(id);
-    }
 
-    public void addCar(Car car) {
-        CarsDAOImpl.getInstance().addCar(car);
-    }
 
-    public List<Car> findAllCars() {
-        return CarsDAOImpl.getInstance().findAllCars();
-    }
-
-    public void delete(Car car) {
-        CarsDAOImpl.getInstance().delete(car);
     }
 
 
-}
+
+
+
 

@@ -1,9 +1,6 @@
 package com.carrent;
 
 
-import com.carrent.dao.ContractDAO;
-import com.carrent.dao.ContractDAOImpl;
-
 import java.util.List;
 
 public class ContractService implements ContractDAO {

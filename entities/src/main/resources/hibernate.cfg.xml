@@ -6,10 +6,10 @@
     <session-factory>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="dialect">org.hibernate.dialect.MySQL57Dialect</property>
-        <property name="connection.url">jdbc:mysql://localhost:3306/carrent</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/prokat</property>
         <property name="connection.username">root</property>
         <property name="connection.password">root</property>
-        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.hbm2ddl.auto">create-drop</property>
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
 
@@ -19,7 +19,8 @@
         <mapping class="com.carrent.Client"/>
         <mapping class="com.carrent.Contract"/>
         <mapping class="com.carrent.Damage"/>
-        <mapping class="com.carrent.OrderStatus"/>
+        <mapping class="com.carrent.BaseEntity"/>
+
 
     </session-factory>
 </hibernate-configuration>
