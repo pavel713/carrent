@@ -13,36 +13,40 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.List;
 
+import static org.junit.Assert.assertNotNull;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+
+@RunWith(SpringRunner.class)
 @ContextConfiguration(locations = {"/dao-config-test.xml"})
-@Transactional(propagation = Propagation.SUPPORTS)
+
 public class CarDAOImplTest {
 
     @Autowired
-    private BaseDAO baseDAO;
-    @Autowired
-    private CarDAO carDAOImpl;
-    private Car car;
+    private CarDAO carDAO;
 
-    @Autowired
-    private SessionFactory sessionFactory;
 
-    protected Session getSession() {
-        return sessionFactory.getCurrentSession();
-    }
+    @Test
+    public void testCarDaoExists(){assertNotNull(carDAO);}
 
     @Test
     public void testFindAll() {
-        List list = carDAOImpl.findAll(0,1);
+        List list = carDAO.findAll();
         Assert.assertEquals(list.size(), 10);
+
+    
+
     }
+
+
+
+
 
 }
 

@@ -47,6 +47,10 @@ public class BaseDAOImpl<T extends BaseEntity> implements BaseDAO<T> {
         T t = (T) getSession().get(clazz, id);
         return t;
     }
-}
+
+
+
+    }
+
 
 

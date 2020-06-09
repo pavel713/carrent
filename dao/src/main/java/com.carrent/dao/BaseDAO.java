@@ -12,4 +12,6 @@ public interface BaseDAO<T> {
     void delete(T entity);
 
     T findAll(Class<T> clazz, Serializable id);
+
+
 }

@@ -2,31 +2,27 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-3.0.xsd
-        http://www.springframework.org/schema/aop
-        http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
     <context:annotation-config/>
     <context:component-scan base-package="com.carrent.dao"/>
+
     <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
-    <tx:annotation-driven transaction-manager="transactionManager"/>
 
     <bean
             class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-
-        <property name="location">
-            <value>classpath:config-test.properties</value>
-        </property>
+        <property name="location" value="classpath:config-test.properties"/>
     </bean>
 
 
-    <!--Translate exceptions to Spring-exceptions -->
     <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
@@ -53,13 +49,8 @@
                 <prop key="hibernate.cglib.use_reflection_optimizer">true</prop>
                 <prop key="hibernate.hbm2ddl.auto">create-drop</prop>
                 <prop key="hibernate.connection.pool_size">10</prop>
-                <prop key="hibernate.c3p0.min_size">5</prop>
-                <prop key="hibernate.c3p0.max_size">20</prop>
-                <prop key="hibernate.c3p0.timeout">1800</prop>
-                <prop key="hibernate.c3p0.max_statements">20</prop>
-                <prop key="hibernate.c3p0.validate">true</prop>
             </props>
         </property>
     </bean>
-    <aop:config proxy-target-class="true"/>
+
 </beans>

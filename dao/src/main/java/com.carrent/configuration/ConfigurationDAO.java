@@ -6,6 +6,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -14,6 +15,7 @@ import java.util.Properties;
 @Configuration
 @ComponentScan("com.carrent.dao")
 @PropertySource("classpath:config.properties")
+@EnableTransactionManagement
 
 public class ConfigurationDAO {
 
@@ -42,10 +44,8 @@ public class ConfigurationDAO {
         return sessionFactory;
     }
 
-    @Bean
-    public PersistenceExceptionTranslationPostProcessor persistenceExceptionTranslationPostProcessor(){
-        return new PersistenceExceptionTranslationPostProcessor();
-    }
+
+
 
     private Properties getHibernateProperties() {
         Properties properties = new Properties();

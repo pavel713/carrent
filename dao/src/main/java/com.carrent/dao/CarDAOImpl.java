@@ -6,13 +6,18 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 
 @Repository
+@Transactional
 public class CarDAOImpl extends BaseDAOImpl implements CarDAO {
     private SessionFactory sessionFactory;
+
 
     @Autowired
     public CarDAOImpl(SessionFactory sessionFactory) {
@@ -27,7 +32,8 @@ public class CarDAOImpl extends BaseDAOImpl implements CarDAO {
 
     @Override
     public void update(Car car) {
-        sessionFactory.getCurrentSession().update(car);
+        sessionFactory.getCurrentSession().createQuery("update c from Car where c.id", Car.class);
+
 
     }
 
@@ -38,11 +44,8 @@ public class CarDAOImpl extends BaseDAOImpl implements CarDAO {
     }
 
     @Override
-    public List<Car> findAll(int page, int perPage) {
-        Criteria criteria = getSession().createCriteria(Car.class);
-        criteria.setFirstResult(page);
-        criteria.setMaxResults(perPage);
-        return (List<Car>) criteria.list();
+    public List<Car> findAll() {
+        return null;
 
 
     }

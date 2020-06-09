@@ -14,15 +14,6 @@ import java.util.Set;
 
 public class Car extends BaseEntity {
 
-
-    public Car(String color, boolean rented, String plate_num, int year, int price) {
-        this.color = color;
-        this.rented = rented;
-        this.plate_num = plate_num;
-        this.year = year;
-        this.price = price;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
@@ -62,12 +53,12 @@ public class Car extends BaseEntity {
     private Set<Contract> contracts = new HashSet<>();
 
 
-
     @Transient
     public String fullName() {
         return model + " " + year;
 
-    }}
+    }
+}
 
 
 

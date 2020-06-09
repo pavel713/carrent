@@ -14,6 +14,10 @@ public interface CarDAO<T> extends BaseDAO<T>  {
 
     void delete(Car car);
 
-    List<Car> findAll(int page, int perPage);
+    List<Car> findAll();
+
+
+
+
 
 }
