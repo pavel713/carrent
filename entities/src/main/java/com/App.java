@@ -8,21 +8,10 @@ import org.hibernate.cfg.Configuration;
 
 /**
  * Hello world!
- *
  */
-public class App
-{
+public class App {
 
-    private static final SessionFactory SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
+    public static void main(String[] args) {
 
-    public static void main( String[] args )
-    {
-        final Session session = SESSION_FACTORY.openSession();
-        final Transaction transaction = session.beginTransaction();
-
-        transaction.commit();
-        session.close();
-
-        System.out.println("test");
     }
 }

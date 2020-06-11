@@ -1,7 +1,6 @@
 package com.carrent.dao;
 
 import java.io.Serializable;
-import java.util.List;
 
 public interface BaseDAO<T> {
 

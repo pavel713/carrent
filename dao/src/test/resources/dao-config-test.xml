@@ -12,7 +12,7 @@
     <context:annotation-config/>
     <context:component-scan base-package="com.carrent.dao"/>
 
-    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
@@ -52,5 +52,4 @@
             </props>
         </property>
     </bean>
-
 </beans>

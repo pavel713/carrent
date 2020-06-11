@@ -16,7 +16,6 @@ import java.util.Properties;
 @ComponentScan("com.carrent.dao")
 @PropertySource("classpath:config.properties")
 @EnableTransactionManagement
-
 public class ConfigurationDAO {
 
     @Resource
@@ -43,7 +42,10 @@ public class ConfigurationDAO {
 
         return sessionFactory;
     }
-
+    @Bean
+    public PersistenceExceptionTranslationPostProcessor persistenceExceptionTranslationPostProcessor(){
+        return new PersistenceExceptionTranslationPostProcessor();
+    }
 
 
 

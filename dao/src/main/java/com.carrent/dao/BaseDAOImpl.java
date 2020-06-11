@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
 
-
 @Repository
 public class BaseDAOImpl<T extends BaseEntity> implements BaseDAO<T> {
 
@@ -19,28 +18,24 @@ public class BaseDAOImpl<T extends BaseEntity> implements BaseDAO<T> {
         this.sessionFactory = sessionFactory;
     }
 
-    protected Session getSession() {
+    private Session getSession() {
         return sessionFactory.getCurrentSession();
     }
-
 
     @Override
     public void save(final T entity) {
         getSession().save(entity);
     }
 
-
     @Override
     public void update(T entity) {
         getSession().update(entity);
     }
 
-
     @Override
     public void delete(T entity) {
         getSession().update(entity);
     }
-
 
     @Override
     public T findAll(Class<T> clazz, Serializable id) {
@@ -48,9 +43,7 @@ public class BaseDAOImpl<T extends BaseEntity> implements BaseDAO<T> {
         return t;
     }
 
-
-
-    }
+}
 
 
 

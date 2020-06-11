@@ -1,10 +1,8 @@
-package util;
+package com.carrent.util;
 
 import org.apache.log4j.Logger;
 
-/**
- * Class for logging all exceptions in app
- */
+
 public class SystemLogger {
     private Logger logger;
     private static SystemLogger instance;
