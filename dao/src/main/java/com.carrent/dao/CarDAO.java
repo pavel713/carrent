@@ -1,6 +1,6 @@
 package com.carrent.dao;
 
-import com.carrent.Car;
+import com.carrent.entities.Car;
 
 import java.util.List;
 

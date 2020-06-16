@@ -1,23 +1,25 @@
 package com.carrent.dao;
 
-import com.carrent.Car;
+import com.carrent.entities.Car;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 
 @Repository
+@Transactional
 public class CarDAOImpl extends BaseDAOImpl implements CarDAO {
 
     private SessionFactory sessionFactory;
 
     @Autowired
-    public CarDAOImpl(SessionFactory sessionFactory, SessionFactory sessionFactory1) {
+    public CarDAOImpl(SessionFactory sessionFactory, SessionFactory session) {
         super(sessionFactory);
-        this.sessionFactory = sessionFactory1;
+        this.sessionFactory = session;
     }
 
     @Override
@@ -47,8 +49,8 @@ public class CarDAOImpl extends BaseDAOImpl implements CarDAO {
 
     @Override
     public List<Car> findAll() {
-        Session session = this.sessionFactory.getCurrentSession();
-        List<Car> carList = session.createQuery("from Car").list();
+        Session session = sessionFactory.getCurrentSession();
+        List<Car> carList = session.createQuery("from Car ").list();
         return carList;
     }
 }

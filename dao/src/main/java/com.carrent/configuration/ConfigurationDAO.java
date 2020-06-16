@@ -13,9 +13,10 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan("com.carrent.dao")
+@ComponentScan("carrent.dao")
 @PropertySource("classpath:config.properties")
 @EnableTransactionManagement
+@EnableAspectJAutoProxy(proxyTargetClass = true)
 public class ConfigurationDAO {
 
     @Resource
@@ -37,7 +38,7 @@ public class ConfigurationDAO {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("com.carrent.dao");
+        sessionFactory.setPackagesToScan("com.carrent.entities");
         sessionFactory.setHibernateProperties(getHibernateProperties());
 
         return sessionFactory;

@@ -1,40 +1,39 @@
-package com.carrent;
+package com.carrent.entities;
+
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "employee")
-public class Employee extends BaseEntity{
+@Table(name = "client")
 
-
-
+public class Client extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    @Getter
-    @Setter
     @Column(name = "name")
     private String name;
 
-    @Getter
-    @Setter
+    @Column(name = "passport")
+    private String passport;
+
+    @Column(name = "address")
+    private String address;
+
     @Column(name = "phone")
     private String phone;
 
-    @OneToMany(mappedBy = "employee")
-    @Getter
-    @Setter
-    private Set<Contract> contracts = new HashSet<>();
+
+
 
 
 

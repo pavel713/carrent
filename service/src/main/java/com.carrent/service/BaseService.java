@@ -1,5 +1,8 @@
-package com.carrent;
+package com.carrent.service;
+
 import com.carrent.dao.BaseDAO;
+import com.carrent.entities.BaseEntity;
+import com.carrent.util.SystemLogger;
 import org.hibernate.HibernateException;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import util.SystemLogger;
+
 
 import java.io.Serializable;
 

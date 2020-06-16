@@ -1,6 +1,7 @@
 package com.carrent.dao;
 
-import com.carrent.BaseEntity;
+
+import com.carrent.entities.BaseEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;

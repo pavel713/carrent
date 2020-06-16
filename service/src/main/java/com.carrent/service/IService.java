@@ -1,4 +1,4 @@
-package com.carrent;
+package com.carrent.service;
 
 import org.hibernate.service.spi.ServiceException;
 
