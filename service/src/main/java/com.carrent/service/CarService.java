@@ -1,11 +1,10 @@
-package com.carrent.dao;
+package com.carrent.service;
 
-import com.carrent.entities.BaseEntity;
 import com.carrent.entities.Car;
 
 import java.util.List;
 
-public interface CarDAO<T extends BaseEntity> extends BaseDAO<T>  {
+public interface CarService {
 
     void save(Car car);
 
@@ -15,9 +14,6 @@ public interface CarDAO<T extends BaseEntity> extends BaseDAO<T>  {
 
     List<Car> listCars();
 
-    Car findById(Long id);
-
-
-
+    Car getCarById(int id);
 
 }

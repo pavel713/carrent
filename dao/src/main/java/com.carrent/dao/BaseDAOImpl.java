@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Repository
 public class BaseDAOImpl<T extends BaseEntity> implements BaseDAO<T> {
@@ -19,7 +20,7 @@ public class BaseDAOImpl<T extends BaseEntity> implements BaseDAO<T> {
         this.sessionFactory = sessionFactory;
     }
 
-    private Session getSession() {
+    Session getSession() {
         return sessionFactory.getCurrentSession();
     }
 
@@ -39,9 +40,14 @@ public class BaseDAOImpl<T extends BaseEntity> implements BaseDAO<T> {
     }
 
     @Override
-    public T findAll(Class<T> clazz, Serializable id) {
-        T t = (T) getSession().get(clazz, id);
-        return t;
+    public T findById(Class<T> tClass, Serializable id) {
+        return (T) getSession().get(tClass, id);
+    }
+
+    @Override
+    public List<T> findAll() {
+     return null;
+
     }
 
 }

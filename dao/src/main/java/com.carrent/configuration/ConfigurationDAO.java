@@ -6,17 +6,17 @@ import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.annotation.Resource;
+import javax.ejb.TransactionManagement;
 import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
 @ComponentScan("carrent.dao")
 @PropertySource("classpath:config.properties")
-@EnableTransactionManagement
 @EnableAspectJAutoProxy(proxyTargetClass = true)
+@TransactionManagement
 public class ConfigurationDAO {
 
     @Resource
@@ -60,4 +60,6 @@ public class ConfigurationDAO {
         return properties;
 
     }
+
+
 }

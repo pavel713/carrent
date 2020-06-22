@@ -15,7 +15,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Entity
 @Table(name = "damage")
-
 public class Damage extends BaseEntity {
 
 

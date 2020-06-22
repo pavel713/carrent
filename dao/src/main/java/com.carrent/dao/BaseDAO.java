@@ -1,8 +1,11 @@
 package com.carrent.dao;
 
-import java.io.Serializable;
+import com.carrent.entities.BaseEntity;
 
-public interface BaseDAO<T> {
+import java.io.Serializable;
+import java.util.List;
+
+public interface BaseDAO<T extends BaseEntity> {
 
     void save(T entity);
 
@@ -10,7 +13,9 @@ public interface BaseDAO<T> {
 
     void delete(T entity);
 
-    T findAll(Class<T> clazz, Serializable id);
+    List<T> findAll();
+
+    T findById (Class<T> tClass, Serializable id);
 
 
 }

@@ -21,11 +21,24 @@ public class CarDAOTest {
 
     @Autowired
     private CarDAO carDAO;
-    private Car car;
+
+    public void setCarDAO(CarDAO carDAO) {
+        this.carDAO = carDAO;
+    }
 
 
+    @Test
+    public void testUpdateCar(Car car) {
+        this.carDAO.update(car);
+        Assert.assertNotNull(car);
 
 
+    }
+
+    @Test
+    public void testSaveCar(Car car) {
+        this.carDAO.save(car);
+    }
 
 
     @Test
@@ -33,12 +46,18 @@ public class CarDAOTest {
         assertNotNull(carDAO);
     }
 
+
     @Test
-    public void testFindAll() {
-        List list = carDAO.findAll();
-        Assert.assertEquals(list.size(),1);
+    public List carList() {
+        return this.carDAO.listCars();
+
+
     }
 
+    @Test
+    public void testDeleteCar(Long id) {
+        this.carDAO.delete(id);
+    }
 }
 
 

@@ -1,22 +1,16 @@
-
+import com.carrent.dao.CarDAO;
 import com.carrent.entities.Car;
-import com.carrent.service.CarsService;
+import com.carrent.service.CarService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
-
-import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"/service-config-test.xml"})
@@ -24,8 +18,27 @@ import static org.junit.Assert.assertNotNull;
 public class CarTest {
 
 
+    private CarService carService;
+
+    @Test
+    public void testUpdateCar(Car car) {
+        this.carService.update(car);
+        Assert.assertNotNull(car);
 
 
+    }
 
+    @Test
+    public void testFindAll() {
+        List list = carService.listCars();
+        Assert.assertEquals(list.size(), 1);
+    }
+
+    @Test
+    public void testDeleteCar(Long id){
+
+        carService.delete((long) 1);
+        Assert.assertNull(carService.getCarById(1));
+    }
 }
 
