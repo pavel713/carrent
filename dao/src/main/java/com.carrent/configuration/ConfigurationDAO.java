@@ -1,14 +1,10 @@
 package com.carrent.configuration;
 
-
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
-import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
-
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import javax.annotation.Resource;
-import javax.ejb.TransactionManagement;
 import javax.sql.DataSource;
 import java.util.Properties;
 
@@ -16,7 +12,6 @@ import java.util.Properties;
 @ComponentScan("carrent.dao")
 @PropertySource("classpath:config.properties")
 @EnableAspectJAutoProxy(proxyTargetClass = true)
-@TransactionManagement
 public class ConfigurationDAO {
 
     @Resource
@@ -43,11 +38,6 @@ public class ConfigurationDAO {
 
         return sessionFactory;
     }
-    @Bean
-    public PersistenceExceptionTranslationPostProcessor persistenceExceptionTranslationPostProcessor(){
-        return new PersistenceExceptionTranslationPostProcessor();
-    }
-
 
 
     private Properties getHibernateProperties() {

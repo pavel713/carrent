@@ -1,10 +1,8 @@
-import com.carrent.dao.CarDAO;
 import com.carrent.entities.Car;
 import com.carrent.service.CarService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Propagation;
@@ -34,11 +32,6 @@ public class CarTest {
         Assert.assertEquals(list.size(), 1);
     }
 
-    @Test
-    public void testDeleteCar(Long id){
-
-        carService.delete((long) 1);
-        Assert.assertNull(carService.getCarById(1));
-    }
+    
 }
 

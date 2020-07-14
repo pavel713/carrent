@@ -1,56 +1,47 @@
 package com.carrent.service;
 
 
-import com.carrent.config.ServiceConfig;
 import com.carrent.dao.CarDAO;
-import com.carrent.dao.CarDAOImpl;
-import com.carrent.entities.BaseEntity;
 import com.carrent.entities.Car;
-import com.carrent.util.SystemLogger;
-import org.hibernate.HibernateException;
-import org.hibernate.service.spi.ServiceException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class CarsServiceImpl implements CarService{
+public class CarsServiceImpl implements CarService {
 
- private CarService carService;
+    private CarDAO carDAO;
+
+    public void setCarDAO(CarDAO carDAO) {
+        this.carDAO = carDAO;
+    }
+
     @Override
     public void save(Car car) {
-    this.carService.save(car);
+        this.carDAO.save(car);
     }
 
     @Override
     public void update(Car car) {
-         this.carService.update(car);
+        this.carDAO.update(car);
     }
 
     @Override
     public void delete(Long id) {
-     this.carService.delete(id);
+        this.carDAO.delete(id);
+
     }
 
     @Override
     public List<Car> listCars() {
-        List<Car> all;
-        try {
-            all = carService.listCars();
-        } catch (HibernateException e) {
-            SystemLogger.getInstance().setLogger(getClass(), e);
-            throw new ServiceException("ERROR_GET_LIST_CARS");
-        }
-        return all;
+        return this.carDAO.listCars();
     }
 
     @Override
-    public Car getCarById(int id) {
-      return (Car) this.carService.getCarById(id);
-
-        }
+    public Car getCarById(Long id) {
+        return this.carDAO.findById(id);
     }
+}
 
 
 

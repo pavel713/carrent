@@ -15,8 +15,9 @@ public class CarDAOImpl extends BaseDAOImpl<Car> implements CarDAO<Car> {
 
     private SessionFactory sessionFactory;
 
-    public CarDAOImpl(SessionFactory sessionFactory) {
+    public CarDAOImpl(SessionFactory sessionFactory, SessionFactory sessionFactory1) {
         super(sessionFactory);
+        this.sessionFactory = sessionFactory1;
     }
 
 
