@@ -1,5 +1,5 @@
-import com.carrent.entities.Car;
-import com.carrent.service.CarService;
+import com.carrent.dao.entities.Car;
+import com.carrent.service.service.CarService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,6 +32,6 @@ public class CarTest {
         Assert.assertEquals(list.size(), 1);
     }
 
-    
+
 }
 
