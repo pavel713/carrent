@@ -1,7 +1,20 @@
 package com.carrent.service.service;
 
 
-public class ContractService {
+import com.carrent.dao.entities.Contract;
 
+import java.util.List;
+
+public interface ContractService {
+
+    void save(Contract contract);
+
+    void update(Contract contract);
+
+    void delete(Long id);
+
+    List<Contract> listContract();
+
+    void getContractById(Long id);
 }
 

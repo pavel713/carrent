@@ -4,10 +4,12 @@ package com.carrent.service.service;
 import com.carrent.dao.entities.Car;
 import com.carrent.dao.repository.CarRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class CarsServiceImpl implements CarService {
 
     private final CarRepository carRepository;

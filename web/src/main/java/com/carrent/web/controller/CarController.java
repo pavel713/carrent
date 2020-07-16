@@ -15,6 +15,9 @@ public class CarController {
 
     private CarsServiceImpl carsService;
 
+    public CarController(CarsServiceImpl carsService) {
+        this.carsService = carsService;
+    }
 
 
     @GetMapping("/cars")

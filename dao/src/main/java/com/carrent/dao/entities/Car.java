@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -34,7 +35,8 @@ public class Car extends BaseEntity {
     @Column(name = "price")
     private int price;
 
-
+    @ManyToMany(mappedBy = "contract")
+    private Set<Contract> contracts;
 
 
 }
