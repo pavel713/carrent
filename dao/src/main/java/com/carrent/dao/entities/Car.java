@@ -35,7 +35,12 @@ public class Car extends BaseEntity {
     @Column(name = "price")
     private int price;
 
-    @ManyToMany(mappedBy = "contract")
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "car_contract",
+            joinColumns = @JoinColumn(name = "car_id"),
+            inverseJoinColumns = @JoinColumn(name = "contract_id")
+    )
     private Set<Contract> contracts;
 
 

@@ -37,6 +37,7 @@ public class Contract extends BaseEntity {
     private int employee_id;
 
 
+    @ManyToMany(mappedBy = "contract")
     private Set<Car> cars;
 
     @OneToOne
@@ -49,7 +50,7 @@ public class Contract extends BaseEntity {
 
     @OneToOne
     @JoinColumn(name = "client_id")
-    private Damage client;
+    private Client client;
 
 }
 
