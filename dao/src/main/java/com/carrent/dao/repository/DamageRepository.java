@@ -1,16 +1,15 @@
 package com.carrent.dao.repository;
 
 import com.carrent.dao.entities.Damage;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Optional;
 
-public interface DamageRepository extends CrudRepository<Damage, Long> {
-    Damage findByDateAndContract(LocalDate date, String contract);
-    void update(Damage damage);
-    void delete(Long id);
-    Optional<Damage> findById(Long id);
+public interface DamageRepository extends JpaRepository<Damage, Long> {
 
-    void findByDateAndContract(Long id);
+
+    void delete(Long id);
 }

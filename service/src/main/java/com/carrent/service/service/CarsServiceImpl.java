@@ -23,10 +23,6 @@ public class CarsServiceImpl implements CarService {
         carRepository.save(car);
     }
 
-    @Override
-    public void update(Car car) {
-        carRepository.save(car);
-    }
 
     @Override
     public void delete(Long id) {
@@ -35,7 +31,7 @@ public class CarsServiceImpl implements CarService {
 
     @Override
     public List<Car> listCars() {
-        return (List<Car>) carRepository.findAll();
+        return carRepository.findAll();
     }
 
 

@@ -11,8 +11,6 @@ public interface ClientService {
 
     void save(Client client);
 
-    void update(Client client);
-
     void delete(Long id);
 
     List<Client> listClient();

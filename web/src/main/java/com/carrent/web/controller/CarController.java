@@ -1,6 +1,7 @@
 package com.carrent.web.controller;
 
 import com.carrent.dao.entities.Car;
+import com.carrent.service.service.CarService;
 import com.carrent.service.service.CarsServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,11 +14,9 @@ import java.util.List;
 @Controller
 public class CarController {
 
-    private CarsServiceImpl carsService;
+    private CarService carsService;
 
-    public CarController(CarsServiceImpl carsService) {
-        this.carsService = carsService;
-    }
+
 
 
     @GetMapping("/cars")
@@ -28,18 +27,18 @@ public class CarController {
     }
 
     @GetMapping("/car-create")
-    public String createUserForm(Car car) {
+    public String createCarForm(Car car) {
         return "car-create";
     }
 
     @PostMapping("/car-create")
-    public String createUser(Car car) {
+    public String createCar(Car car) {
         carsService.save(car);
         return "redirect:/cars";
     }
 
     @GetMapping("car-delete/{id}")
-    public String deleteUser(@PathVariable("id") Long id) {
+    public String deleteCar(@PathVariable("id") Long id) {
         carsService.delete(id);
         return "redirect:/cars";
     }
@@ -47,7 +46,7 @@ public class CarController {
 
 
     @PostMapping("/update-car")
-    public String updateUser(Car car) {
+    public String updateCar(Car car) {
         carsService.save(car);
         return "redirect:/cars";
     }

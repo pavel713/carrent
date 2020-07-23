@@ -8,7 +8,7 @@ import java.util.List;
 public interface DamageService  {
     void save(Damage damage);
 
-    void update(Damage damage);
+
 
     void delete(Long id);
 

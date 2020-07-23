@@ -2,9 +2,12 @@ package com.carrent.service.service;
 
 import com.carrent.dao.entities.Employee;
 import com.carrent.dao.repository.EmployeeRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
+@Service
+@Transactional
 public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeRepository employeeRepository;
 
@@ -17,11 +20,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeRepository.save(employee);
     }
 
-    @Override
-    public void update(Employee employee) {
-        employeeRepository.update(employee);
 
-    }
 
     @Override
     public void delete(Long id) {
@@ -31,12 +30,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<Employee> listEmployee() {
-        return (List<Employee>) employeeRepository.findAll();
+        return employeeRepository.findAll();
     }
 
     @Override
     public void getEmployeeById(Long id) {
-        employeeRepository.findById(id);
 
     }
+
+
 }
+

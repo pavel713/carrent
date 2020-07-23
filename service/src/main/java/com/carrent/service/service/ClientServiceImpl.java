@@ -2,6 +2,7 @@ package com.carrent.service.service;
 
 import com.carrent.dao.entities.Client;
 import com.carrent.dao.repository.ClientRepository;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,7 +10,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class ClientServiceImpl implements ClientService{
+public class ClientServiceImpl implements ClientService {
     private final ClientRepository clientRepository;
 
     public ClientServiceImpl(ClientRepository clientRepository) {
@@ -22,11 +23,6 @@ public class ClientServiceImpl implements ClientService{
         clientRepository.save(client);
     }
 
-    @Override
-    public void update(Client client) {
-        clientRepository.update(client);
-
-    }
 
     @Override
     public void delete(Long id) {
@@ -36,12 +32,14 @@ public class ClientServiceImpl implements ClientService{
 
     @Override
     public List<Client> listClient() {
-        return (List<Client>) clientRepository.findAll();
+        return clientRepository.findAll();
     }
 
     @Override
     public void getClientById(Long id) {
-        clientRepository.findById(id);
 
     }
+
+
 }
+

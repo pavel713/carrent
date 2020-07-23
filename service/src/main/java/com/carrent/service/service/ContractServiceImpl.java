@@ -2,9 +2,12 @@ package com.carrent.service.service;
 
 import com.carrent.dao.entities.Contract;
 import com.carrent.dao.repository.ContractRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
+@Service
+@Transactional
 public class ContractServiceImpl implements ContractService {
 
     private final ContractRepository contractRepository;
@@ -18,11 +21,6 @@ public class ContractServiceImpl implements ContractService {
         contractRepository.save(contract);
     }
 
-    @Override
-    public void update(Contract contract) {
-        contractRepository.update(contract);
-
-    }
 
     @Override
     public void delete(Long id) {
@@ -32,7 +30,7 @@ public class ContractServiceImpl implements ContractService {
 
     @Override
     public List<Contract> listContract() {
-        return (List<Contract>) contractRepository.findAll();
+        return contractRepository.findAll();
     }
 
     @Override

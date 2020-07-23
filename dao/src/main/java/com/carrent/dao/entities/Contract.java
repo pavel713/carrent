@@ -4,21 +4,20 @@ package com.carrent.dao.entities;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Set;
 
 
-@NoArgsConstructor
-@Entity
-@Table(name = "contract")
 @Getter
 @Setter
+@NoArgsConstructor
+@ToString(callSuper = true)
+@Entity
+@Table(name = "contract")
 public class Contract extends BaseEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
 
     @Column(name = "date_begin")
@@ -28,7 +27,7 @@ public class Contract extends BaseEntity {
     private LocalDate date_end;
 
     @Column(name = "client_id")
-    private int id;
+    private Long id;
 
     @Column(name = "car_id")
     private int car_id;
@@ -37,20 +36,20 @@ public class Contract extends BaseEntity {
     private int employee_id;
 
 
-    @ManyToMany(mappedBy = "contract")
-    private Set<Car> cars;
+//    @ManyToMany(mappedBy = "contract")
+//    private Set<Car> cars;
+//
+//    @OneToOne
+//    @JoinColumn(name = "damage_id")
+//    private Damage damage;
 
-    @OneToOne
-    @JoinColumn(name = "damage_id")
-    private Damage damage;
-
-    @OneToOne
-    @JoinColumn(name = "employee_id")
-    private Employee employee;
-
-    @OneToOne
-    @JoinColumn(name = "client_id")
-    private Client client;
+//    @OneToOne
+//    @JoinColumn(name = "employee_id")
+//    private Employee employee;
+//
+//    @OneToOne
+//    @JoinColumn(name = "client_id")
+//    private Client client;
 
 }
 

@@ -2,9 +2,12 @@ package com.carrent.service.service;
 
 import com.carrent.dao.entities.Damage;
 import com.carrent.dao.repository.DamageRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
+@Service
+@Transactional
 public class DamageServiceImpl implements DamageService {
 
     private final DamageRepository damageRepository;
@@ -18,10 +21,6 @@ public class DamageServiceImpl implements DamageService {
         damageRepository.save(damage);
     }
 
-    @Override
-    public void update(Damage damage) {
-        damageRepository.update(damage);
-    }
 
     @Override
     public void delete(Long id) {
@@ -30,11 +29,14 @@ public class DamageServiceImpl implements DamageService {
 
     @Override
     public List<Damage> listDamage() {
-        return (List<Damage>) damageRepository.findAll();
+        return damageRepository.findAll();
     }
 
     @Override
     public void getDamageById(Long id) {
-        damageRepository.findByDateAndContract(id);
+
     }
+
+
 }
+

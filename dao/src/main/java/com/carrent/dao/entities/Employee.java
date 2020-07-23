@@ -3,18 +3,17 @@ package com.carrent.dao.entities;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
-@NoArgsConstructor
-@Entity
-@Table(name = "employee")
 @Getter
 @Setter
+@NoArgsConstructor
+@ToString(callSuper = true)
+@Entity
+@Table(name = "employee")
 public class Employee extends BaseEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
 
     @Column(name = "name")

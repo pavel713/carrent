@@ -9,7 +9,7 @@ public interface ContractService {
 
     void save(Contract contract);
 
-    void update(Contract contract);
+
 
     void delete(Long id);
 

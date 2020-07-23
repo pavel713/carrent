@@ -2,7 +2,6 @@ package com.carrent.dao.configuration;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -17,12 +16,10 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@EnableTransactionManagement
-@EnableJpaRepositories(basePackages = "com.carrent.dao")
-@ComponentScan(basePackages = "com.carrent")
 @PropertySource("classpath:config.properties")
-
-public class ConfigurationDAO {
+@EnableTransactionManagement
+@EnableJpaRepositories(basePackages = "com.carrent.dao.repository")
+public class ConfigDAO {
 
     @Value("${database.url}")
     private String url;
@@ -59,7 +56,7 @@ public class ConfigurationDAO {
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         vendorAdapter.setGenerateDdl(true);
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
@@ -70,18 +67,15 @@ public class ConfigurationDAO {
         return factoryBean;
     }
 
-
     private Properties getHibernateProperties() {
         Properties properties = new Properties();
         properties.setProperty("dialect", dialect);
         properties.setProperty("show_sql", show_sql);
         properties.setProperty("format_sql", format_sql);
         properties.setProperty("creation_policy", creation_policy);
-
         return properties;
 
     }
-
     @Bean
     public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
