@@ -1,16 +1,13 @@
-package com.carrent.web;
-
+package com.carrent.web.config;
 
 import com.carrent.dao.configuration.ConfigDAO;
-import com.carrent.web.config.WebConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-
 
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{ConfigDAO.class};
+        return new Class[]{ConfigDAO.class,SecurityConfig.class};
     }
 
     @Override
@@ -23,3 +20,4 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
         return new String[]{"/"};
     }
 }
+

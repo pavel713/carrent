@@ -10,8 +10,8 @@ public interface CarService {
 
     void delete(Long id);
 
-    List<Car> listCars();
+    List<Car> findAll();
 
-    void getCarById(Long id);
+    Car getCarById(Long id);
 
 }

@@ -2,12 +2,14 @@ package com.carrent.service.service;
 
 import com.carrent.dao.entities.Employee;
 import com.carrent.dao.repository.EmployeeRepository;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 @Service
 @Transactional
+
 public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeRepository employeeRepository;
 

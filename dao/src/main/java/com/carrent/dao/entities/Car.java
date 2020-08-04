@@ -1,10 +1,6 @@
 package com.carrent.dao.entities;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -12,11 +8,11 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString(callSuper = true)
+
+@ToString
 @Entity
 @Table(name = "сars")
 public class Car extends BaseEntity {
-
 
     @Column(name = "model")
     private String model;
@@ -36,17 +32,9 @@ public class Car extends BaseEntity {
     @Column(name = "price")
     private int price;
 
-
-
-//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinTable(
-//            name = "car_contract",
-//            joinColumns = @JoinColumn(name = "car_id"),
-//            inverseJoinColumns = @JoinColumn(name = "contract_id")
-//    )
-//    private Set<Contract> contracts;
-
-
+    @Column(name = "car_class")
+    @Enumerated(EnumType.STRING)
+    private CarClass carClass;
 
 }
 
