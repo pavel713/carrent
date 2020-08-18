@@ -1,6 +1,8 @@
 package com.carrent.dao.entities;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -9,9 +11,8 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User extends BaseEntity {
 
     @Column(name = "name")
@@ -27,25 +28,20 @@ public class User extends BaseEntity {
     private String phone;
 
     @Column
-    @Size(min = 7, message = "Minimum 7 symbols")
     private String password;
 
-    @OneToMany(mappedBy = "user")
-    private Set<Order> orders;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Order order;
 
-    public String getPassword() {
-        return password;
-    }
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<Role> roles;
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+
+
+
+
 }

@@ -9,6 +9,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
+
 @Entity
 @Table(name = "damage")
 public class Damage extends BaseEntity {
@@ -16,11 +17,14 @@ public class Damage extends BaseEntity {
     @Column(name = "date")
     private LocalDate date;
 
-
     @Column(name = "result")
     private String result;
 
-    @OneToOne(mappedBy = "damage")
-    private Order order;
+    @Column(name = "comment")
+    private String comment;
+
+    @ManyToOne
+    @JoinColumn(name = "car_id")
+    private Car car;
 
 }
