@@ -3,7 +3,6 @@ package com.carrent.web.controller;
 import com.carrent.dao.entities.User;
 import com.carrent.service.service.UserService;
 import com.carrent.web.util.UserValidator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,34 +13,32 @@ import javax.validation.Valid;
 @Controller
 public class AuthController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+    private final UserValidator userValidator;
 
-    @Autowired
-    private UserValidator userValidator;
-
-    @GetMapping("/login")
-    public String getSignUp(Model model) {
-        model.addAttribute("user", new User());
-        return "login";
+    public AuthController(UserService userService, UserValidator userValidator) {
+        this.userService = userService;
+        this.userValidator = userValidator;
     }
 
-    @PostMapping("/login")
+    @GetMapping("/registration")
+    public String getSignUp(Model model) {
+        model.addAttribute("user", new User());
+        return "registration";
+    }
+
+    @PostMapping("/registration")
     public String signUp(@ModelAttribute @Valid User user, BindingResult result) {
         userValidator.validate(user, result);
         if (result.hasErrors()) {
-            return "login";
+            return "registration";
         }
         userService.save(user);
         return "redirect:/users";
     }
 
     @RequestMapping("/login")
-    public String login(@RequestParam(name = "error", required = false) Boolean error,
-                        Model model) {
-        if (Boolean.TRUE.equals(error)) {
-            model.addAttribute("error", true);
-        }
+    public String login(){
         return "login";
     }
 }

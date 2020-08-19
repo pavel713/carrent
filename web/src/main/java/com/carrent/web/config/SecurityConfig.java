@@ -20,21 +20,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private AuthProviderImpl authProvider;
 
     @Override
-
-
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/login", "/login").anonymous()
-                .antMatchers("/cars").authenticated()
+        http
+                .authorizeRequests()
+                  .antMatchers( "/registration", "/login").anonymous()
+                .antMatchers("/order").authenticated()
                 .and().csrf().disable()
+
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login/process")
                 .usernameParameter("name")
-                .failureUrl("/login?error=true")
-                .and()
-                .exceptionHandling()
-                .accessDeniedPage("/cars")
                 .and().logout();
     }
 

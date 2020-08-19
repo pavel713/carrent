@@ -5,21 +5,18 @@
     <title>Login Page</title>
 </head>
 <body>
-
-<div class="wrapper fadeInDown">
-    <div id="formContent">
-
-        <form>
-            <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
-            <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
-            <input type="submit" class="fadeIn fourth" value="Log In">
-        </form>
-
-        <div id="formFooter">
-            <a class="underlineHover" href="#">Forgot Password?</a>
-        </div>
-
+<form action="/login/process" method="post">
+    <div>
+        Login: <input name="name" type="name">
     </div>
+    <div>
+        Password:
+        <input name="password" type="password">
+    </div>
+    <input type="submit">
+</form>
+
+
 </div>
 </body>
 </html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+</head>
+<body>
+<div class="container" style="margin-top: 15%">
+    <form action="/registration" method="post">
+        <div class="form-group-lg">
+            <label for="username">Username</label>
+            <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+            <input class="form-control is-valid" id="username" name="username" required type="text"/>
+            <label for="password">Password</label>
+            <input class="form-control is is-valid" id="password" name="password" required type="password">
+            <button class="btn btn-primary" type="submit">Save</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

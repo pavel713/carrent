@@ -24,7 +24,7 @@ public class Order extends BaseEntity {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
-    private User user;
+    private User users;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "employee_id")

@@ -16,7 +16,7 @@ public class CarController {
     }
 
     @GetMapping("/cars")
-    public String findAllCars(Model model) {
+    public String getCars(Model model) {
         model.addAttribute("cars", carService.findAll());
         return "cars";
     }

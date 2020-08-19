@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Getter
@@ -30,7 +29,8 @@ public class User extends BaseEntity {
     @Column
     private String password;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+
+    @OneToOne
     private Order order;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
@@ -40,8 +40,18 @@ public class User extends BaseEntity {
 
 
 
+    public String getPassword() {
+        return password;
+    }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    public String getName() {
+        return name;
+    }
 
-
-
+    public void setName(String name) {
+        this.name = name;
+    }
 }

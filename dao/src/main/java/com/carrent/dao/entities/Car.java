@@ -39,7 +39,7 @@ public class Car extends BaseEntity {
     @ManyToMany(mappedBy = "cars")
     private Set<Order> order;
 
-    @OneToMany(mappedBy = "car")
+    @OneToMany(mappedBy = "car", fetch = FetchType.EAGER)
     private List<Damage> damages;
 }
 
