@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Car List</title></head>
+
+<body>
+
+<hr>
+<table>
+    <thead>
+    <tr>
+        <th>Model</th>
+        <th>Color</th>
+        <th>Year</th>
+        <th>Price</th>
+        <th>Car Class</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="car : ${cars}">
+        <td th:text="${car.model}"></td>
+        <td th:text="${car.color}"></td>
+        <td th:text="${car.year}"></td>
+        <td th:text="${car.price}"></td>
+        <td th:text="${car.category}"></td>
+        <form method="post" th:action="@{/order}">
+            <input th:value="${car.id}"></form>
+        <button class="btn btn-link" th:text="${car.id}" type="submit"></button>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

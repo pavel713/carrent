@@ -34,11 +34,11 @@ public class AuthController {
             return "registration";
         }
         userService.save(user);
-        return "redirect:/users";
+        return "order";
     }
 
     @RequestMapping("/login")
-    public String login(){
+    public String login() {
         return "login";
     }
 }

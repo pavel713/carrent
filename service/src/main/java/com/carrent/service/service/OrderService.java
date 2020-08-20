@@ -13,4 +13,7 @@ public interface OrderService {
     List<Order> findAll();
 
     Long getOrderById(Long id);
+
+    long countDays(Order order);
+
 }

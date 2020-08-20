@@ -39,7 +39,6 @@ public class User extends BaseEntity {
     private Set<Role> roles;
 
 
-
     public String getPassword() {
         return password;
     }
@@ -47,6 +46,7 @@ public class User extends BaseEntity {
     public void setPassword(String password) {
         this.password = password;
     }
+
     public String getName() {
         return name;
     }

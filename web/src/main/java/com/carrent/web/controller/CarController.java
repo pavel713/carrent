@@ -4,7 +4,11 @@ import com.carrent.dao.entities.Car;
 import com.carrent.service.service.CarService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller
 public class CarController {
@@ -15,36 +19,13 @@ public class CarController {
         this.carService = carService;
     }
 
+
     @GetMapping("/cars")
-    public String getCars(Model model) {
-        model.addAttribute("cars", carService.findAll());
-        return "cars";
+    public String findAllCars(Model model) {
+        List<Car> cars = carService.findAll();
+        model.addAttribute("cars", cars);
+        return "carsList";
     }
 
 
-    @PostMapping("/car_add")
-    public String createCar(Car car) {
-        carService.save(car);
-        return "redirect:/cars";
-    }
-
-    @GetMapping("car-delete/{id}")
-    public String deleteCar(@PathVariable("id") Long id) {
-        carService.delete(id);
-        return "redirect:/cars";
-    }
-
-
-    @PostMapping("/update-car")
-    public String updateCar(Car car) {
-        carService.save(car);
-        return "redirect:/cars";
-    }
-
-
-    @GetMapping("/cars/{id}")
-    public Car getCar(@PathVariable Long id) {
-        return this.carService.getCarById(id);
-    }
 }
-

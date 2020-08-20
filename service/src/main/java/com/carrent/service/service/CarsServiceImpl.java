@@ -1,6 +1,7 @@
 package com.carrent.service.service;
 
 import com.carrent.dao.entities.Car;
+import com.carrent.dao.entities.Category;
 import com.carrent.dao.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,6 +46,11 @@ public class CarsServiceImpl implements CarService {
             throw new ValidationException("Car not found!");
         }
         return car;
+    }
+
+    @Override
+    public List<Car> findCarByCategory(Category category) {
+        return carRepository.findCarByCategory(category);
     }
 }
 

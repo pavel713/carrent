@@ -5,7 +5,7 @@
     <title>Create car</title>
 </head>
 <body>
-<form th:action="@{/create-car}" th:object="${car}" method="post">
+<form th:action="@{/car-create}" th:object="${car}" method="post">
     <label for="model">Model</label>
     <input type="text" th:field="*{model}" id="model" placeholder="Model">
     <br/>
@@ -23,6 +23,13 @@
     <br/>
     <label for="color">Price</label>
     <input type="text" th:field="*{price}" id="price" placeholder="Price">
+    <br/>
+    <label for="category">Category</label>
+    <select class="form-control" id="category" name="category">
+        <option>ECONOM</option>
+        <option>STANDART</option>
+        <option>LUXURY</option>
+    </select>
     <br/>
     <input type="submit" value="Create Car">
 </form>

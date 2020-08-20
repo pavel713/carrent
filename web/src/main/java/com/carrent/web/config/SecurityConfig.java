@@ -16,21 +16,28 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 @ComponentScan(basePackages = "com.carrent")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
-    private AuthProviderImpl authProvider;
+    private  AuthProviderImpl authProvider;
+
+
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
                   .antMatchers( "/registration", "/login").anonymous()
-                .antMatchers("/order").authenticated()
+                  .antMatchers("/order","/cars").authenticated()
+                  .antMatchers("/admin").hasAuthority("ADMIN")
                 .and().csrf().disable()
-
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login/process")
                 .usernameParameter("name")
+                .and()
+                .exceptionHandling()
+                .accessDeniedPage("/")
                 .and().logout();
     }
 

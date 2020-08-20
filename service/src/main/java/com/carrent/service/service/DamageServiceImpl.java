@@ -2,9 +2,12 @@ package com.carrent.service.service;
 
 import com.carrent.dao.entities.Damage;
 import com.carrent.dao.repository.DamageRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
+@Service
+@Transactional
 public class DamageServiceImpl implements DamageService {
     private final DamageRepository damageRepository;
 

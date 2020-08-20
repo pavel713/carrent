@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Order</title>
-</head>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head><meta charset="UTF-8">
+    <title>Order Car</title> </head>
+
 <body>
-Order page
+    <hr>
+    <div class="container">
+        <form name="order">
+            <div class="row">
+                <input type="hidden" class="form-control" name="car_id" th:value="${carById.id}">
+                <div class="col-sm-4">
+                    <input type="date" class="form-control" name="start_date" placeholder="Pick start date"><br><br>
+                    <h4 id="startDateValidation" class="bg-danger"></h4>
+                </div>
+                <div class="col-sm-4">
+                    <input type="date" class="form-control" name="end_date" placeholder="Pick end date"><br><br>
+                    <h4 id="endDateValidation" class="bg-danger"></h4>
+                </div>
+                <div class="col-sm-4">
+                    <button class="btn btn-success" type="submit">Submit</button>
+                </div>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>

@@ -33,7 +33,7 @@ public class AuthProviderImpl implements AuthenticationProvider {
             throw new UsernameNotFoundException("User not found");
         }
         String password = authentication.getCredentials().toString();
-        if (!password.equals(user.getPassword())) {
+        if (!passwordEncoder.matches(password, user.getPassword())) {
             throw new BadCredentialsException("Bad credentials");
         }
         List<GrantedAuthority> authorities = new ArrayList<>();

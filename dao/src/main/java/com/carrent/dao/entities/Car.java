@@ -3,6 +3,7 @@ package com.carrent.dao.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
 
@@ -41,7 +42,10 @@ public class Car extends BaseEntity {
 
     @OneToMany(mappedBy = "car", fetch = FetchType.EAGER)
     private List<Damage> damages;
+
+
 }
+
 
 
 
