@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 @Service
-@Transactional
+
 
 public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeRepository employeeRepository;
@@ -31,7 +31,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> listEmployee() {
+    public List<Employee> findAll() {
         return employeeRepository.findAll();
     }
 

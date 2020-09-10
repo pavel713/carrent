@@ -1,35 +1,39 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en" th:fragment="copy" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Car List</title></head>
-
+    <title>Car List</title>
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
+</head>
 <body>
 
-<hr>
-<table>
-    <thead>
-    <tr>
-        <th>Model</th>
-        <th>Color</th>
-        <th>Year</th>
-        <th>Price</th>
-        <th>Car Class</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="car : ${cars}">
-        <td th:text="${car.model}"></td>
-        <td th:text="${car.color}"></td>
-        <td th:text="${car.year}"></td>
-        <td th:text="${car.price}"></td>
-        <td th:text="${car.category}"></td>
-        <form method="post" th:action="@{/order}">
-            <input th:value="${car.id}"></form>
-        <button class="btn btn-link" th:text="${car.id}" type="submit"></button>
-    </tr>
-    </tbody>
-</table>
+<div class="mx-5">
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Model</th>
+            <th scope="col">Color</th>
+            <th scope="col">Price</th>
+            <th scope="col">Year</th>
+            <th scope="col">Category</th>
+            <th scope="col">Order</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <tr th:each="car : ${carList}">
+            <td><span th:text="${car.id}"></span></td>
+            <td><span th:text="${car.model}"></span></td>
+            <td><span th:text="${car.color}"></span></td>
+            <td><span th:text="'$ ' + ${car.price}"></span></td>
+            <td><span th:text="${car.year}"></span></td>
+            <td><span th:text="${car.category}"></span></td>
+            <a href="order.html" class="btn btn-info"></a>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

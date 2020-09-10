@@ -1,17 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Login Page</title>
+    <title>Login</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<div class="container ml-auto">
+    <div class="alert alert-danger w-25" role="alert" th:if="${param.error}" th:text="#{err.invalid.name.pass}"></div>
+    <div class="alert alert-danger w-25" role="alert" th:if="${param.logout}" th:text="#{param.logout}"></div>
 <form action="/login/process" method="post">
     <div>
         Login: <input name="name" type="name">
     </div>
     <div>
-        Password:
-        <input name="password" type="password">
+        Password: <input name="password" type="password">
     </div>
     <input type="submit">
 </form>

@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 @Service
-@Transactional
+
 public class DamageServiceImpl implements DamageService {
     private final DamageRepository damageRepository;
 

@@ -10,7 +10,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 @Service
-@Transactional
+
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;

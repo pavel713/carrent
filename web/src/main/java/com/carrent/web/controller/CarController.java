@@ -5,8 +5,6 @@ import com.carrent.service.service.CarService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -23,9 +21,10 @@ public class CarController {
     @GetMapping("/cars")
     public String findAllCars(Model model) {
         List<Car> cars = carService.findAll();
-        model.addAttribute("cars", cars);
+        model.addAttribute("carList", cars);
         return "carsList";
     }
+
 
 
 }

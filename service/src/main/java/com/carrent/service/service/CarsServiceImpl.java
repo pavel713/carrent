@@ -11,7 +11,7 @@ import javax.validation.ValidationException;
 import java.util.List;
 
 @Service
-@Transactional
+
 
 public class CarsServiceImpl implements CarService {
 

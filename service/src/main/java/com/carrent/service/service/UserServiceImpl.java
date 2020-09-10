@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
+
 
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> listUser() {
+    public List<User> findAll() {
         return userRepository.findAll();
     }
 
