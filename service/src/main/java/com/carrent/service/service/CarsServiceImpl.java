@@ -5,14 +5,11 @@ import com.carrent.dao.entities.Category;
 import com.carrent.dao.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.ValidationException;
 import java.util.List;
 
 @Service
-
-
 public class CarsServiceImpl implements CarService {
 
     private final CarRepository carRepository;

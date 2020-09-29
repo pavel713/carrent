@@ -4,13 +4,10 @@ import com.carrent.dao.entities.User;
 import com.carrent.dao.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-
-
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -27,7 +24,6 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
-
     @Override
     public void delete(Long id) {
         userRepository.delete(id);
@@ -40,7 +36,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void getUserById(Long id) {
+    public User getUserById(Long id) {
+        return userRepository.getOne(id);
 
     }
 

@@ -1,16 +1,14 @@
 package com.carrent.service.service;
 
-import com.carrent.dao.entities.Car;
 import com.carrent.dao.entities.Order;
 import com.carrent.dao.repository.OrderRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-@Service
 
+@Service
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
@@ -36,8 +34,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Long getOrderById(Long id) {
-        return (id);
+    public Order getOrderById(Long id) {
+        return orderRepository.getOne(id);
 
     }
 

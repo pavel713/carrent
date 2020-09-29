@@ -31,6 +31,8 @@ public class User extends BaseEntity {
     @Column
     private String password;
 
+    @Column(name = "email")
+    private String email;
 
     @OneToOne
     private Order order;

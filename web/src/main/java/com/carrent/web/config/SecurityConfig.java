@@ -25,18 +25,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                  .antMatchers( "/registration", "/login").anonymous()
-                  .antMatchers("/order","/cars").authenticated()
-                  .antMatchers("/admin").hasAuthority("ADMIN")
-                .and().csrf().disable()
+                  .antMatchers("/","/registration").permitAll()
+                .anyRequest().authenticated()
+                .and()
                 .formLogin()
                 .loginPage("/login")
-                .loginProcessingUrl("/login/process")
-                .usernameParameter("name")
+                .defaultSuccessUrl("/")
+                .permitAll()
                 .and()
-                .exceptionHandling()
-                .accessDeniedPage("/")
-                .and().logout();
+                .logout()
+                .permitAll();
+
     }
 
     @Override

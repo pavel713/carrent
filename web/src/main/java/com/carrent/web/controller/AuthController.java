@@ -28,9 +28,10 @@ public class AuthController {
     }
 
     @PostMapping("/registration")
-    public String signUp(@ModelAttribute @Valid User user, BindingResult result) {
+    public String signUp(User user, BindingResult result) {
         userValidator.validate(user, result);
         if (result.hasErrors()) {
+
             return "registration";
         }
         userService.save(user);

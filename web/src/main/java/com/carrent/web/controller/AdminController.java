@@ -10,10 +10,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
 @Controller
+@RequestMapping("/admin")
 @PreAuthorize(value = "hasAuthority('ADMIN')")
 public class AdminController {
 
@@ -25,13 +27,21 @@ public class AdminController {
         this.userService = userService;
     }
 
-    @GetMapping("/car-create")
+    @GetMapping("/admin")
+    public String getAdminPage(Model model) {
+        List<Car> cars = carService.findAll();
+        model.addAttribute("cars", cars);
+        return "admin";
+    }
+
+
+    @GetMapping("/car-add")
     public String createCarForm(Car car) {
         return "carAdd";
     }
 
-    @PostMapping("/car-create")
-    public String createCar(Car car) {
+    @PostMapping("/car-add")
+    public String addCar(Car car) {
         carService.save(car);
         return "redirect:/cars";
     }

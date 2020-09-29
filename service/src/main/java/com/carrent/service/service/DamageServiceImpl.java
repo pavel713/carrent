@@ -3,11 +3,10 @@ package com.carrent.service.service;
 import com.carrent.dao.entities.Damage;
 import com.carrent.dao.repository.DamageRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-@Service
 
+@Service
 public class DamageServiceImpl implements DamageService {
     private final DamageRepository damageRepository;
 
@@ -33,6 +32,6 @@ damageRepository.delete(id);
 
     @Override
     public Damage getDamageById(Long id) {
-        return getDamageById(id);
+        return damageRepository.getOne(id);
     }
 }

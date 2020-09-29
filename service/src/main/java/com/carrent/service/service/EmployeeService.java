@@ -13,7 +13,7 @@ public interface EmployeeService {
 
     List<Employee> findAll();
 
-    void getEmployeeById(Long id);
+    Employee getEmployeeById(Long id);
 
 }
 
