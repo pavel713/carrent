@@ -22,6 +22,5 @@ public class Employee extends BaseEntity {
     @Column(name = "phone")
     private String phone;
 
-    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
-    private Order order;
+
 }

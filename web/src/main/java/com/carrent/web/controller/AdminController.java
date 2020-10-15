@@ -27,23 +27,24 @@ public class AdminController {
         this.userService = userService;
     }
 
-    @GetMapping("/admin")
-    public String getAdminPage(Model model) {
-        List<Car> cars = carService.findAll();
-        model.addAttribute("cars", cars);
-        return "admin";
-    }
 
-
-    @GetMapping("/car-add")
-    public String createCarForm(Car car) {
+    @GetMapping("/car/add")
+    public String getSignUpCar(Model model) {
+        model.addAttribute("car", new Car());
         return "carAdd";
     }
 
-    @PostMapping("/car-add")
-    public String addCar(Car car) {
+    @PostMapping("/car/add")
+    public String signUpCar(Car car) {
         carService.save(car);
-        return "redirect:/cars";
+        return "redirect:/admin/cars";
+    }
+
+    @GetMapping("cars")
+    public String carListView(Model model) {
+        List<Car> carList = carService.findAll();
+        model.addAttribute("carList", carList);
+        return "carsList";
     }
 
     @GetMapping("car-delete/{id}")
@@ -52,14 +53,14 @@ public class AdminController {
         return "redirect:/cars";
     }
 
-    @GetMapping("/car-update/{id}")
+    @GetMapping("/car/update/{id}")
     public String updateCarForm(@PathVariable("id") Long id, Model model) {
         Car car = carService.getCarById(id);
         model.addAttribute("car", car);
         return "carUpdate";
     }
 
-    @PostMapping("/car-update")
+    @PostMapping("/car/update")
     public String updateCar(Car car) {
         carService.save(car);
         return "redirect:/cars";

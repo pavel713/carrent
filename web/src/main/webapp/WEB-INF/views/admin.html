@@ -6,35 +6,6 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<form th:each="cars :${cars}"
-      th:action="@{/admin/addCar}" method="post"
-      th:object="${car}">
-    <div class="section">
-        <label for="model" th:text="#{car.model}"></label>
-        <input class="form-control is-valid" id="model" required th:field="*{model}" type="text"/>
-        <label for="color" th:text="#{car.color}"></label>
-        <input class="form-control is is-valid" id="color" required th:field="*{color}" type="text">
-        <label for="plate_num" th:text="Plate Num"></label>
-        <input class="form-control is is-valid" id="plate_num" required th:field="*{plate_num}" type="text">
-        <label for="price" th:text="#{car.price}"></label>
-        <input class="form-control is is-valid" id="price" required th:field="*{price}" type="number">
-        <label for="year" th:text="#{car.year}"></label>
-        <input class="form-control is is-valid" id="year" required th:field="*{year}" type="number">
-        <label for="category" th:text="#{car.category}"></label>
-        <input class="form-control is is-valid" id="category" required th:field="*{category}" type="text">
-        <input name="_csrf" th:value="${_csrf.token}" type="hidden"/>
-        <input type="submit" value="add">
-    </div>
-</form>
-<form class="delete-section" th:action="@{/admin/deleteSubCategory}" method="post">
-    <p class="paragraph">Delete subcategory</p>
-    <select th:car="id">
-        <option th:each="subcat : ${cars}"
-                th:text="${car.model}"
-                th:value="${car.id}">
-        </option>
-    </select>
-    <input type="submit" value="delete">
-</form>
+
 </body>
 </html>

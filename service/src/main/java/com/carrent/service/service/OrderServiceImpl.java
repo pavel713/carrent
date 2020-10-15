@@ -4,9 +4,10 @@ import com.carrent.dao.entities.Order;
 import com.carrent.dao.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
+import java.time.LocalDate;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -40,19 +41,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public long countDays(Order order) {
-        long days;
-        Calendar start = order.getStartDate();
-        Calendar end = order.getEndDate();
-        days = daysBetween(start, end);
-        return days;
-    }
-
-    private long daysBetween(Calendar startDate, Calendar endDate) {
-        endDate.add(Calendar.DATE, 1);
-        long end = endDate.getTimeInMillis();
-        long start = startDate.getTimeInMillis();
-        return TimeUnit.MILLISECONDS.toDays(Math.abs(end - start));
+    public long getDaysCountBetweenDates(LocalDate dateBefore, LocalDate dateAfter) {
+        return DAYS.between(dateBefore, dateAfter);
     }
 
 

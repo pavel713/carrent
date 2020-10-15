@@ -2,6 +2,7 @@ package com.carrent.service.service;
 
 import com.carrent.dao.entities.Order;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface OrderService {
@@ -14,6 +15,5 @@ public interface OrderService {
 
     Order getOrderById(Long id);
 
-    long countDays(Order order);
-
+    long getDaysCountBetweenDates(LocalDate dateBefore, LocalDate dateAfter);
 }

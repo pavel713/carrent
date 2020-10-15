@@ -2,26 +2,29 @@ package com.carrent.service.service;
 
 import com.carrent.dao.entities.User;
 import com.carrent.dao.repository.UserRepository;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
+
     }
 
 
     @Override
     public void save(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
+
+
     }
 
     @Override
@@ -42,9 +45,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getOne(String name) {
-        return userRepository.findByName(name);
+    public User findUserByUsername(String name) {
+        return userRepository.findByUsername(name);
     }
 
-}
+    @Override
+    public boolean isExists(User user) {
+        return userRepository.findAll().stream()
+                .map(User::getUsername)
+                .allMatch(name -> name.equals(user.getUsername()));
+    }
 
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findByUsername(username);
+    }
+}

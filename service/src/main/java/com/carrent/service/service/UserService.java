@@ -2,11 +2,13 @@ package com.carrent.service.service;
 
 
 import com.carrent.dao.entities.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 
 import java.util.List;
 
-public interface UserService {
+public interface UserService extends UserDetailsService {
 
 
     void save(User user);
@@ -17,7 +19,9 @@ public interface UserService {
 
     User getUserById(Long id);
 
-    User getOne(String name);
+    User findUserByUsername(String name);
+
+    boolean isExists(User user);
 
 
 }

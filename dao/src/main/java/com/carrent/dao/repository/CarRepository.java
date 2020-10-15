@@ -11,6 +11,5 @@ import java.util.List;
 public interface CarRepository extends JpaRepository<Car, Long> {
     Car findCarById(Long id);
 
-
     List<Car> findCarByCategory(Category category);
 }

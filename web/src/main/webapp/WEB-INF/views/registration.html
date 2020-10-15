@@ -8,10 +8,11 @@
 </head>
 <body>
 <form th:method="POST" th:action="@{/registration}" th:object="${user}">
-    <div class="form-group-lg">
+    <div class="container ml-auto">
+        <h2 th:text="#{registration}"></h2>
             <label class="text-danger" for="name" th:if="${message}" th:text="${message}"></label>
             <label for="name" th:text="#{username}" th:unless="${message}"></label>
-            <input class="form-control is-valid" id="name" required th:field="*{name}" type="text"/>
+            <input class="form-control is-valid" id="name" required th:field="*{username}" type="text"/>
             <label for="password" th:text="#{password}"></label>
             <input class="form-control is is-valid" id="password" required th:field="*{password}" type="password">
             <label for="passport" th:text="#{user.passport}"></label>

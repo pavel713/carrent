@@ -22,7 +22,7 @@ public class DamageServiceImpl implements DamageService {
 
     @Override
     public void delete(Long id) {
-damageRepository.delete(id);
+        damageRepository.delete(id);
     }
 
     @Override
@@ -34,4 +34,6 @@ damageRepository.delete(id);
     public Damage getDamageById(Long id) {
         return damageRepository.getOne(id);
     }
+
+
 }
