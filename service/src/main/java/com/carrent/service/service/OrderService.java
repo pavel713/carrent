@@ -13,7 +13,7 @@ public interface OrderService {
 
     List<Order> findAll();
 
-    Order getOrderById(Long id);
+    Order findOrderById(Long id);
 
     long getDaysCountBetweenDates(LocalDate dateBefore, LocalDate dateAfter);
 }

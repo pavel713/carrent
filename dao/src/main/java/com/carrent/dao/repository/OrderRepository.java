@@ -6,4 +6,5 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public interface OrderRepository extends JpaRepository<Order, Long> {
+    Order findOrderById(Long id);
 }

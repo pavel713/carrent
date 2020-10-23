@@ -26,9 +26,14 @@ public class UserController {
     }
 
     @PostMapping("/registration")
-    public String addUser(User user) {
+    public String addUser(User user, Model model)  {
+        if (userService.isExists(user)) {
+            model.addAttribute("message", "User Already exist");
+           return "/registration";
+        }
+
         userService.save(user);
-        return "redirect:/login";
+        return "redirect:login";
 
     }
 

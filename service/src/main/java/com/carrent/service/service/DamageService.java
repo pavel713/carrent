@@ -13,5 +13,5 @@ public interface DamageService {
 
     List<Damage> findAll();
 
-    Damage getDamageById(Long id);
+    Damage findDamageById(Long id);
 }

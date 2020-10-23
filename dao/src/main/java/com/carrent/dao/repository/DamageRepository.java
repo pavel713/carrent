@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public interface DamageRepository extends JpaRepository<Damage, Long> {
-
+    Damage findDamageById(Long id);
 
 
 }

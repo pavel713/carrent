@@ -1,15 +1,20 @@
 package com.carrent.service.service;
 
+import com.carrent.dao.entities.Order;
 import com.carrent.dao.entities.User;
 import com.carrent.dao.repository.UserRepository;
+import org.hibernate.service.spi.ServiceException;
+import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRepository userRepository;
 
@@ -21,36 +26,64 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 
     @Override
-    public void save(User user) {
-        userRepository.save(user);
-
-
-    }
-
-    @Override
-    public void delete(Long id) {
-        userRepository.delete(id);
+    public void save(User user) throws DataAccessException {
+        try {
+            userRepository.save(user);
+        } catch (DataAccessException e) {
+            throw new ServiceException("message", e);
+        }
 
     }
 
     @Override
-    public List<User> findAll() {
+    public void delete(Long id) throws DataAccessException {
+        try {
+            userRepository.delete(id);
+        } catch (DataAccessException e) {
+            throw new ServiceException("message", e);
+        }
+
+    }
+
+
+    @Override
+    public List<User> findAll() throws DataAccessException {
+        try {
+            userRepository.findAll();
+        } catch (DataAccessException e) {
+            throw new ServiceException("message", e);
+        }
         return userRepository.findAll();
     }
 
     @Override
-    public User getUserById(Long id) {
-        return userRepository.getOne(id);
-
+    public User findUserById(Long id) throws DataAccessException {
+        try {
+            userRepository.findUserById(id);
+        } catch (DataAccessException e) {
+            throw new ServiceException("message", e);
+        }
+        return userRepository.findUserById(id);
     }
 
     @Override
-    public User findUserByUsername(String name) {
+    public User findUserByUsername(String name) throws DataAccessException {
+        try {
+            userRepository.findByUsername(name);
+        } catch (DataAccessException e) {
+            throw new ServiceException("message", e);
+        }
         return userRepository.findByUsername(name);
     }
 
+
     @Override
-    public boolean isExists(User user) {
+    public boolean isExists(User user) throws DataAccessException {
+        try {
+            userRepository.findAll();
+        } catch (DataAccessException e) {
+            throw new ServiceException("message", e);
+        }
         return userRepository.findAll().stream()
                 .map(User::getUsername)
                 .allMatch(name -> name.equals(user.getUsername()));
@@ -58,7 +91,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
+        try {
+            userRepository.findByUsername(username);
+        } catch (DataAccessException e) {
+            throw new ServiceException("message", e);
+        }
         return userRepository.findByUsername(username);
     }
 }
