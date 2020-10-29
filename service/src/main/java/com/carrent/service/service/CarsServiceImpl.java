@@ -15,7 +15,7 @@ import java.util.List;
 @Transactional
 public class CarsServiceImpl implements CarService {
 
-    private final CarRepository carRepository;
+    private CarRepository carRepository;
 
     @Autowired
     public CarsServiceImpl(CarRepository carRepository) {
@@ -45,10 +45,11 @@ public class CarsServiceImpl implements CarService {
     public List<Car> findAll() throws DataAccessException {
         try {
             carRepository.findAll();
+            return carRepository.findAll();
         } catch (DataAccessException e) {
             throw new ServiceException("message", e);
+
         }
-        return carRepository.findAll();
     }
 
 
@@ -56,22 +57,23 @@ public class CarsServiceImpl implements CarService {
     public Car getCarById(Long id) throws DataAccessException {
         try {
             carRepository.findCarById(id);
-
+            return carRepository.findCarById(id);
         } catch (DataAccessException e) {
             throw new ServiceException("message", e);
         }
-        return carRepository.findCarById(id);
+
     }
 
     @Override
     public List<Car> findCarByCategory(Category category) throws DataAccessException {
         try {
             carRepository.findCarByCategory(category);
+            return carRepository.findCarByCategory(category);
         } catch (DataAccessException e) {
             throw new ServiceException("message", e);
 
         }
-        return carRepository.findCarByCategory(category);
+
     }
 }
 

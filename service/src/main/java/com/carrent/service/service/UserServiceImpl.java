@@ -1,6 +1,5 @@
 package com.carrent.service.service;
 
-import com.carrent.dao.entities.Order;
 import com.carrent.dao.entities.User;
 import com.carrent.dao.repository.UserRepository;
 import org.hibernate.service.spi.ServiceException;
@@ -50,30 +49,33 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public List<User> findAll() throws DataAccessException {
         try {
             userRepository.findAll();
+            return userRepository.findAll();
         } catch (DataAccessException e) {
             throw new ServiceException("message", e);
         }
-        return userRepository.findAll();
+
     }
 
     @Override
     public User findUserById(Long id) throws DataAccessException {
         try {
             userRepository.findUserById(id);
+            return userRepository.findUserById(id);
         } catch (DataAccessException e) {
             throw new ServiceException("message", e);
         }
-        return userRepository.findUserById(id);
+
     }
 
     @Override
     public User findUserByUsername(String name) throws DataAccessException {
         try {
             userRepository.findByUsername(name);
+            return userRepository.findByUsername(name);
         } catch (DataAccessException e) {
             throw new ServiceException("message", e);
         }
-        return userRepository.findByUsername(name);
+
     }
 
 
@@ -81,12 +83,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public boolean isExists(User user) throws DataAccessException {
         try {
             userRepository.findAll();
+            return userRepository.findAll().stream()
+                    .map(User::getUsername)
+                    .allMatch(name -> name.equals(user.getUsername()));
         } catch (DataAccessException e) {
             throw new ServiceException("message", e);
         }
-        return userRepository.findAll().stream()
-                .map(User::getUsername)
-                .allMatch(name -> name.equals(user.getUsername()));
+
     }
 
 
@@ -94,9 +97,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
         try {
             userRepository.findByUsername(username);
+            return userRepository.findByUsername(username);
         } catch (DataAccessException e) {
             throw new ServiceException("message", e);
         }
-        return userRepository.findByUsername(username);
+
     }
 }

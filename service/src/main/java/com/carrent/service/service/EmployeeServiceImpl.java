@@ -1,6 +1,5 @@
 package com.carrent.service.service;
 
-import com.carrent.dao.entities.Damage;
 import com.carrent.dao.entities.Employee;
 import com.carrent.dao.repository.EmployeeRepository;
 import org.hibernate.service.spi.ServiceException;
@@ -42,20 +41,22 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<Employee> findAll() throws DataAccessException {
         try {
             employeeRepository.findAll();
+            return employeeRepository.findAll();
         } catch (DataAccessException e) {
             throw new ServiceException("message", e);
         }
-        return employeeRepository.findAll();
+
     }
 
     @Override
     public Employee findEmployeeById(Long id) throws DataAccessException {
         try {
             employeeRepository.findEmployeeById(id);
+            return employeeRepository.findEmployeeById(id);
         } catch (DataAccessException e) {
             throw new ServiceException("message", e);
         }
-        return employeeRepository.findEmployeeById(id);
+
     }
 
 

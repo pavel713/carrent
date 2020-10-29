@@ -46,20 +46,22 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> findAll() throws DataAccessException {
         try {
             orderRepository.findAll();
+            return orderRepository.findAll();
         } catch (DataAccessException e) {
             throw new ServiceException("message", e);
         }
-        return orderRepository.findAll();
+
     }
 
     @Override
     public Order findOrderById(Long id) throws DataAccessException {
         try {
             orderRepository.findOrderById(id);
+            return orderRepository.findOrderById(id);
         } catch (DataAccessException e) {
             throw new ServiceException("message", e);
         }
-        return orderRepository.findOrderById(id);
+
     }
 
 

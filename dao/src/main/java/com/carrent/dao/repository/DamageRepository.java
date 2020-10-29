@@ -9,4 +9,5 @@ public interface DamageRepository extends JpaRepository<Damage, Long> {
     Damage findDamageById(Long id);
 
 
+    void delete(Long id);
 }
