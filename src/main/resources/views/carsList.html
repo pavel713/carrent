@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" th:fragment="copy" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Car List</title>
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
+</head>
+<body>
+<h2 align="center" th:text="#{car.page}"></h2>
+<div class="mx-5">
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col" th:text="#{car.model}"></th>
+            <th scope="col" th:text="#{car.color}"></th>
+            <th scope="col" th:text="#{car.price}"></th>
+            <th scope="col" th:text="#{car.year}"></th>
+            <th scope="col" th:text="#{car.category}"></th>
+            <th scope="col" th:text="#{order.page}"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${carList.isEmpty()}">
+            <td colspan="2">No cars available</td>
+        </tr>
+        <tr th:each="car : ${carList}">
+            <td><span th:text="${car.id}"></span></td>
+            <td><span th:text="${car.model}"></span></td>
+            <td><span th:text="${car.color}"></span></td>
+            <td><span th:text="'$ ' + ${car.price}"></span></td>
+            <td><span th:text="${car.year}"></span></td>
+            <td><span th:text="${car.category}"></span></td>
+            <td>
+                <form action="order" th:action="@{/order/new}">
+                    <input hidden name="carId" th:value="${car.getId()}">
+                    <input name="_csrf" th:value="${_csrf.token}" type="hidden"/>
+                    <button class="btn btn-primary mt-2" th:text="#{order}" type="submit"></button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Order</title>
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
+</head>
+<body>
+
+<h2 align="center" th:text="#{order.page}"></h2>
+<div class="container">
+    <table class="table">
+        <thead class="table">
+        <tr>
+            <th scope="col" th:text="#{car.model}"></th>
+            <th scope="col" th:text="#{car.year}"></th>
+            <th scope="col" th:text="#{car.category}"></th>
+            <th scope="col" th:text="#{car.price}"></th>
+        </tr>
+        </thead>
+        <tr th:if="${carList.isEmpty()}">
+            <td colspan="2">No cars available</td>
+        </tr>
+
+
+        <tr>
+            <th scope="row" th:text="#{order.total.price}"></th>
+            <td><span th:text="'$ '+${totalPrice}"></span></td>
+            <td></td>
+            <td>
+                <form method="post" th:action="@{/order/submit}">
+                    <input name="_csrf" th:value="${_csrf.token}" type="hidden"/>
+                    <div>
+                        <button class="btn btn-success" th:text="#{order.submit}" type="submit"></button>
+                    </div>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
