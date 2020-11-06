@@ -1,9 +1,7 @@
 package com.carrent.dao.entities;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -40,8 +38,6 @@ public class User implements UserDetails {
 
     @Column(name = "email")
     private String email;
-
-    private boolean active;
 
     @OneToOne
     private Order order;
@@ -86,4 +82,6 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
 }

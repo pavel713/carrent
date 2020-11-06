@@ -18,6 +18,8 @@
             <th scope="col">Address</th>
             <th scope="col">Phone</th>
             <th scope="col">E-mail</th>
+            <th scope="col">Role</th>
+
         </tr>
         </thead>
         <tbody>
@@ -29,7 +31,26 @@
             <td><span th:text="${user.address}"></span></td>
             <td><span th:text="${user.phone}"></span></td>
             <td><span th:text="${user.email}"></span> </td>
+            <td><span th:text="${user.roles}"></span></td>
+
         </tr>
+        <td>
+
+                <form method="post"
+                      th:action="@{/admin/user/delAdmin}">
+                    <input hidden name="userId" th:value="${user.id}">
+                    <input name="_csrf" th:value="${_csrf.token}" type="hidden"/>
+                    <button class="btn btn-danger" th:text="#{del.admin.role}" type="submit"></button>
+                </form>
+
+
+                <form method="post"
+                      th:action="@{/admin/user/addAdmin}">
+                    <input hidden name="userId" th:value="${user.id}">
+                    <input name="_csrf" th:value="${_csrf.token}" type="hidden"/>
+                    <button class="btn btn-success" th:text="#{add.admin.role}" type="submit"></button>
+                </form>
+
         </tbody>
     </table>
 </div>

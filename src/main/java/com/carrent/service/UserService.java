@@ -2,7 +2,6 @@ package com.carrent.service;
 
 
 import com.carrent.dao.entities.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 
@@ -22,6 +21,16 @@ public interface UserService extends UserDetailsService {
     User findUserByUsername(String name);
 
     boolean isExists(User user);
+
+    void deleteAdminRole(User user);
+
+    void addAdminRole(User user);
+
+    User getUserFromSecurityContext();
+
+    User getUserDetails();
+
+
 
 
 }

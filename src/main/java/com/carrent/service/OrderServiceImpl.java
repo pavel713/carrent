@@ -1,25 +1,29 @@
 package com.carrent.service;
 
+import com.carrent.dao.entities.Car;
 import com.carrent.dao.entities.Order;
+import com.carrent.dao.entities.User;
+import com.carrent.dao.repository.CarRepository;
 import com.carrent.dao.repository.OrderRepository;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.List;
-
-import static java.time.temporal.ChronoUnit.DAYS;
 
 @Service
 @Transactional
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
+    private final CarRepository carRepository;
 
-    public OrderServiceImpl(OrderRepository orderRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository, CarRepository carRepository) {
         this.orderRepository = orderRepository;
+        this.carRepository = carRepository;
     }
 
 
@@ -52,6 +56,7 @@ public class OrderServiceImpl implements OrderService {
 
     }
 
+
     @Override
     public Order findOrderById(Long id) throws DataAccessException {
         try {
@@ -63,11 +68,10 @@ public class OrderServiceImpl implements OrderService {
 
     }
 
-
     @Override
-    public long getDaysCountBetweenDates(LocalDate dateBefore, LocalDate dateAfter) {
-        return DAYS.between(dateBefore, dateAfter);
+    public double calculateCost(Date start, Date end) {
+        return ChronoUnit.DAYS.between(start.toInstant(), end.toInstant());
+
     }
-
-
 }
+

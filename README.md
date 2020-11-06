@@ -23,7 +23,7 @@ Run Spring Boot with PostgreSQL in the Docker container:
 
 8) Cmd: docker run -p 8081:8081 --net myNetwork  d737457c26d5(paste copied ID here) (Run application)
 
-9) Open your browser and enter : http://localhost:8081/
+9) Open your browser and enter: http://localhost:8081/
 
     
 

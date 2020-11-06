@@ -1,8 +1,11 @@
 package com.carrent.service;
 
+import com.carrent.dao.entities.Car;
 import com.carrent.dao.entities.Order;
+import com.carrent.dao.entities.User;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public interface OrderService {
@@ -15,5 +18,5 @@ public interface OrderService {
 
     Order findOrderById(Long id);
 
-    long getDaysCountBetweenDates(LocalDate dateBefore, LocalDate dateAfter);
+    double calculateCost(Date start, Date end);
 }

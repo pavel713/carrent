@@ -1,13 +1,17 @@
 package com.carrent.web.controller;
 
 import com.carrent.dao.entities.Car;
+import com.carrent.dao.entities.Order;
 import com.carrent.dao.entities.User;
 import com.carrent.service.CarService;
 import com.carrent.service.OrderService;
 import com.carrent.service.UserService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -15,29 +19,43 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class OrderController {
 
     private final CarService carService;
+    private final OrderService orderService;
+    private final UserService userService;
 
 
-    public OrderController(CarService carService) {
+    public OrderController(CarService carService, OrderService orderService, UserService userService) {
         this.carService = carService;
+        this.orderService = orderService;
+        this.userService = userService;
+    }
 
+    @ModelAttribute("currentUser")
+    public User getCurrentUser() {
+        return userService.getUserFromSecurityContext();
     }
 
 
     @GetMapping("/order")
-    public String getOrder(Model model) {
-        model.addAttribute("user", new User());
+    public String setOrder(@RequestParam("carId") Long carId, Model model) {
+        Car car = carService.getCarById(carId);
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        User user = userService.findUserByUsername(name);
+
+        model.addAttribute("userId", user);
+        model.addAttribute("car", car);
+        model.addAttribute("order", new Order());
         return "order";
     }
 
-    @GetMapping("order/new")
-    public String addCar() {
+
+    @PostMapping("order/submit")
+    public String submitOrder(Order order) {
+        User user = userService.getUserFromSecurityContext();
+
+        orderService.save(order);
+        user.setOrder(order);
         return "order";
-    }
-
-    @PostMapping("order/new")
-    public String orderCar(@RequestParam("carId") Long id) {
-        Car car = carService.getCarById(id);
-        return "redirect:order";
-
     }
 }
