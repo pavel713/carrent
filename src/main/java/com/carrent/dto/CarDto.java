@@ -1,65 +1,32 @@
-package com.carrent.dao.entities;
+package com.carrent.dto;
 
-import com.carrent.dto.CarDto;
+import com.carrent.dao.entities.Car;
+import com.carrent.dao.entities.Category;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.Data;
 
-import javax.persistence.*;
-import java.util.List;
-import java.util.Set;
-
-
-
+@Data
 @AllArgsConstructor
 
-@Entity
-@Table(name = "car")
-public class Car {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CarDto {
+    public CarDto() {
+    }
 
     private Long id;
-    @Column(name = "model")
+
     private String model;
 
-    @Column(name = "color")
     private String color;
 
-    @Column(name = "rented")
     private boolean rented;
 
-    @Column(name = "plate_num")
     private String plate_num;
 
-    @Column(name = "year")
     private int year;
 
-
-    @Column(name = "price")
     private int price;
 
-    @Column(name = "category")
-    @Enumerated(EnumType.STRING)
     private Category category;
-
-    @ManyToMany(mappedBy = "cars")
-    private Set<Order> order;
-
-    @OneToMany(mappedBy = "car", fetch = FetchType.EAGER)
-    private List<Damage> damages;
-
-    public Car() {
-
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
 
     public Long getId() {
         return id;
@@ -117,18 +84,24 @@ public class Car {
         this.price = price;
     }
 
-    public Car(CarDto car) {
-        this.id = car.getId();
-        this.model = car.getModel();
-        this.color = car.getColor();
-        this.plate_num = car.getPlate_num();
-        this.year = car.getYear();
-        this.price = car.getPrice();
-        this.rented = car.isRented();
-        this.category = car.getCategory();
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public CarDto(Car cardto) {
+     this.id = cardto.getId();
+     this.model = cardto.getModel();
+     this.color = cardto.getColor();
+     this.plate_num = cardto.getPlate_num();
+     this.year = cardto.getYear();
+     this.price = cardto.getPrice();
+     this.rented = cardto.isRented();
+     this.category = cardto.getCategory();
 
     }
+
 }
-
-
-

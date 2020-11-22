@@ -1,8 +1,6 @@
 package com.carrent.service;
 
-import com.carrent.dao.entities.Car;
 import com.carrent.dao.entities.Order;
-import com.carrent.dao.entities.User;
 import com.carrent.dao.repository.CarRepository;
 import com.carrent.dao.repository.OrderRepository;
 import org.hibernate.service.spi.ServiceException;
@@ -68,10 +66,10 @@ public class OrderServiceImpl implements OrderService {
 
     }
 
-    @Override
-    public double calculateCost(Date start, Date end) {
-        return ChronoUnit.DAYS.between(start.toInstant(), end.toInstant());
-
+    public long calculateDateInterval(Date startDate, Date endDate) {
+        return ChronoUnit.DAYS.between(startDate.toInstant(), endDate.toInstant());
     }
+
+
 }
 

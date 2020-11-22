@@ -10,12 +10,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
+@SessionAttributes({"car", "order"})
 public class OrderController {
 
     private final CarService carService;
@@ -42,7 +40,6 @@ public class OrderController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName();
         User user = userService.findUserByUsername(name);
-
         model.addAttribute("userId", user);
         model.addAttribute("car", car);
         model.addAttribute("order", new Order());
@@ -51,11 +48,10 @@ public class OrderController {
 
 
     @PostMapping("order/submit")
-    public String submitOrder(Order order) {
+    public String submitOrder(Order order){
         User user = userService.getUserFromSecurityContext();
-
+        order.setUsers(user);
         orderService.save(order);
-        user.setOrder(order);
-        return "order";
+        return "redirect:/cost";
     }
 }

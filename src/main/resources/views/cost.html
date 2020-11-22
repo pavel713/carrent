@@ -7,7 +7,7 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
 </head>
 <body>
-<h2 align="center" th:text="#{order.page}"></h2>
+<h2 align="center" th:text="#{total.price}"></h2>
 <div class="container my-3">
     <table class="table">
         <thead class="table">
@@ -15,27 +15,27 @@
             <th scope="col" th:text="#{car.model}"></th>
             <th scope="col" th:text="#{car.year}"></th>
             <th scope="col" th:text="#{car.price}"></th>
+            <th scope="col" th:text="#{total.price}"></th>
             <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="car : ${car}">
+        <tr th:each="car : ${carById}">
             <td><span th:text="${car.model}"></span></td>
             <td><span th:text="${car.year}"></span></td>
             <td><span th:text="'$ ' + ${car.price}"></span></td>
         </tr>
+        <th scope="row" th:text="#{total.price}"></th>
+        <td><span th:text="'$ '+${totalPrice}"></span></td>
+        <td></td>
+        <td>
+            <form action="/cost" th:object="${order}" method="post">
+                <div class="container ml-auto">
+                    <input name="_csrf" th:value="${_csrf.token}" type="hidden"/>
+                    <button class="btn btn-primary mt-2" th:text="#{order.submit}" type="submit"></button>
+                </div>
+            </form>
         </tbody>
-
-        <form action="/order/submit" th:object="${order}" method="post">
-            <div class="container ml-auto">
-                <label for="start_date" th:text="#{date.begin}"></label>
-                <input type="date" class="form-control is is-valid"  id="start_date" name="startDate">
-                <label for="end_date" th:text="#{date.end}"></label>
-                <input type="date" class="form-control is is-valid"  id="end_date" name="endDate">
-                <input name="_csrf" th:value="${_csrf.token}" type="hidden"/>
-                <button class="btn btn-primary mt-2" th:text="#{order.submit}" type="submit"></button>
-            </div>
-        </form>
     </table>
 </div>
 </body>

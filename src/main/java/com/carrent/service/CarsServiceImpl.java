@@ -3,6 +3,7 @@ package com.carrent.service;
 import com.carrent.dao.entities.Car;
 import com.carrent.dao.entities.Category;
 import com.carrent.dao.repository.CarRepository;
+import com.carrent.dto.CarDto;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -17,9 +18,11 @@ public class CarsServiceImpl implements CarService {
 
     private final CarRepository carRepository;
 
+
     @Autowired
     public CarsServiceImpl(CarRepository carRepository) {
         this.carRepository = carRepository;
+
     }
 
 
@@ -64,6 +67,7 @@ public class CarsServiceImpl implements CarService {
 
     }
 
+
     @Override
     public List<Car> findCarByCategory(Category category) throws DataAccessException {
         try {
@@ -74,6 +78,20 @@ public class CarsServiceImpl implements CarService {
 
         }
 
+    }
+
+    @Override
+    public CarDto carToDto(Car car) {
+     CarDto carDto = new CarDto(car);
+     return carDto;
+
+
+    }
+
+    @Override
+    public Car DtoToCar(CarDto carDto) {
+        Car car = new Car(carDto);
+        return car;
     }
 }
 

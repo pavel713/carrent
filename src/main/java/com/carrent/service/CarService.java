@@ -2,6 +2,7 @@ package com.carrent.service;
 
 import com.carrent.dao.entities.Car;
 import com.carrent.dao.entities.Category;
+import com.carrent.dto.CarDto;
 
 import java.util.List;
 
@@ -17,4 +18,7 @@ public interface CarService {
 
     List<Car> findCarByCategory(Category category);
 
+    CarDto carToDto(Car car);
+
+    Car DtoToCar(CarDto carDto);
 }

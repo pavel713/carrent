@@ -12,7 +12,6 @@
     <table class="table">
         <thead class="thead-dark">
         <tr>
-            <th scope="col">#</th>
             <th scope="col">Model</th>
             <th scope="col">Color</th>
             <th scope="col">Price</th>
@@ -26,7 +25,6 @@
             <td colspan="2">No cars available</td>
         </tr>
         <tr th:each="car : ${carList}">
-            <td><span th:text="${car.id}"></span></td>
             <td><span th:text="${car.model}"></span></td>
             <td><span th:text="${car.color}"></span></td>
             <td><span th:text="'$ ' + ${car.price}"></span></td>

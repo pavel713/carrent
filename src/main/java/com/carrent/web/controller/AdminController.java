@@ -46,7 +46,7 @@ public class AdminController {
     }
 
     @PostMapping("car/delete/")
-    public String deleteCar(@RequestParam Long carId) {
+    public String deleteCar(@PathVariable Long carId) {
         carService.delete(carId);
         return "redirect:admin/cars";
     }
@@ -88,7 +88,7 @@ public class AdminController {
     }
 
     @PostMapping("/user/delAdmin")
-    public String deleteAdminRole(@RequestParam Long userId) {
+    public String deleteAdminRole(@PathVariable Long userId) {
         User user = userService.findUserById(userId);
         userService.deleteAdminRole(user);
         userService.save(user);
@@ -99,7 +99,7 @@ public class AdminController {
     }
 
     @PostMapping("/user/addAdmin")
-    public String addAdminRole(@RequestParam Long userId) {
+    public String addAdminRole(@PathVariable Long userId) {
         User user = userService.findUserById(userId);
         userService.addAdminRole(user);
         userService.save(user);

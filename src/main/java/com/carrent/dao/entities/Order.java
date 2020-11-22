@@ -2,9 +2,9 @@ package com.carrent.dao.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
 
@@ -20,11 +20,13 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "date_begin")
-    private Date date_begin;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "start_date")
+    private Date startDate;
 
-    @Column(name = "date_end")
-    private Date date_end;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "end_date")
+    private Date endDate;
 
     @Column(name="cost")
     private double cost;
@@ -41,20 +43,24 @@ public class Order {
         this.id = id;
     }
 
-    public Date getDate_begin() {
-        return date_begin;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setDate_begin(Date date_begin) {
-        this.date_begin = date_begin;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    public Date getDate_end() {
-        return date_end;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setDate_end(Date date_end) {
-        this.date_end = date_end;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public void setCars(Set<Car> cars) {
+        this.cars = cars;
     }
 
     public double getCost() {
@@ -77,7 +83,7 @@ public class Order {
         return cars;
     }
 
-    public void setCars(Set<Car> cars) {
+    public void setCars(Long id) {
         this.cars = cars;
     }
 
@@ -87,7 +93,10 @@ public class Order {
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "car_id")
     )
+
     private Set<Car> cars;
+
+
 }
 
 
