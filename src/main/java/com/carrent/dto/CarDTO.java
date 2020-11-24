@@ -7,10 +7,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-
-public class CarDto {
-    public CarDto() {
-    }
+public class CarDTO {
 
     private Long id;
 
@@ -27,6 +24,9 @@ public class CarDto {
     private int price;
 
     private Category category;
+
+    public CarDTO() {
+    }
 
     public Long getId() {
         return id;
@@ -92,15 +92,15 @@ public class CarDto {
         this.category = category;
     }
 
-    public CarDto(Car cardto) {
-     this.id = cardto.getId();
-     this.model = cardto.getModel();
-     this.color = cardto.getColor();
-     this.plate_num = cardto.getPlate_num();
-     this.year = cardto.getYear();
-     this.price = cardto.getPrice();
-     this.rented = cardto.isRented();
-     this.category = cardto.getCategory();
+    public CarDTO(Car carDto) {
+        this.id = carDto.getId();
+        this.model = carDto.getModel();
+        this.color = carDto.getColor();
+        this.plate_num = carDto.getPlate_num();
+        this.year = carDto.getYear();
+        this.price = carDto.getPrice();
+        this.rented = carDto.isRented();
+        this.category = carDto.getCategory();
 
     }
 

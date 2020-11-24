@@ -1,8 +1,10 @@
 package com.carrent.web.controller;
 
-import com.carrent.dao.entities.Car;
 import com.carrent.dao.entities.Order;
 import com.carrent.dao.entities.User;
+import com.carrent.dto.CarDTO;
+import com.carrent.dto.OrderDTO;
+import com.carrent.dto.UserDTO;
 import com.carrent.service.CarService;
 import com.carrent.service.OrderService;
 import com.carrent.service.UserService;
@@ -35,11 +37,11 @@ public class OrderController {
 
     @GetMapping("/order")
     public String setOrder(@RequestParam("carId") Long carId, Model model) {
-        Car car = carService.getCarById(carId);
+        CarDTO car = carService.getCarById(carId);
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName();
-        User user = userService.findUserByUsername(name);
+        UserDTO user = userService.findUserByUsername(name);
         model.addAttribute("userId", user);
         model.addAttribute("car", car);
         model.addAttribute("order", new Order());
@@ -48,7 +50,7 @@ public class OrderController {
 
 
     @PostMapping("order/submit")
-    public String submitOrder(Order order){
+    public String submitOrder(OrderDTO order){
         User user = userService.getUserFromSecurityContext();
         order.setUsers(user);
         orderService.save(order);

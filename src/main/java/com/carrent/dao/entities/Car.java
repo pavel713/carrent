@@ -1,13 +1,11 @@
 package com.carrent.dao.entities;
 
-import com.carrent.dto.CarDto;
+import com.carrent.dto.CarDTO;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
-
 
 
 @AllArgsConstructor
@@ -117,7 +115,7 @@ public class Car {
         this.price = price;
     }
 
-    public Car(CarDto car) {
+    public Car(CarDTO car) {
         this.id = car.getId();
         this.model = car.getModel();
         this.color = car.getColor();

@@ -2,6 +2,7 @@ package com.carrent.web.controller;
 
 import com.carrent.dao.entities.Car;
 import com.carrent.dao.entities.Order;
+import com.carrent.dto.OrderDTO;
 import com.carrent.service.CarService;
 import com.carrent.service.OrderService;
 import org.springframework.stereotype.Controller;
@@ -31,7 +32,7 @@ public class CostController {
     }
 
     @PostMapping("/cost")
-    public String setFinalCost(Order order, Car car) {
+    public String setFinalCost(OrderDTO order, Car car) {
         long days = orderService.calculateDateInterval(order.getStartDate(), order.getEndDate());
         order.setCost(car.getPrice() * days);
         orderService.save(order);

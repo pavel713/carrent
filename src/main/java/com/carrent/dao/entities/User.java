@@ -1,7 +1,7 @@
 package com.carrent.dao.entities;
 
+import com.carrent.dto.UserDTO;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -47,6 +47,10 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
+    public User() {
+
+    }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -83,5 +87,15 @@ public class User implements UserDetails {
         return true;
     }
 
+    public User(UserDTO user) {
+        this.id = user.getId();
+        this.username = user.getUsername();
+        this.passport = user.getPassport();
+        this.address = user.getAddress();
+        this.phone = user.getPhone();
+        this.email = user.getEmail();
+        this.order = user.getOrder();
+        this.roles = user.getRoles();
 
+    }
 }

@@ -2,7 +2,8 @@ package com.carrent.web.controller;
 
 import com.carrent.dao.entities.Car;
 import com.carrent.dao.entities.Category;
-import com.carrent.dao.entities.User;
+import com.carrent.dto.CarDTO;
+import com.carrent.dto.UserDTO;
 import com.carrent.service.CarService;
 import com.carrent.service.UserService;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -33,14 +34,14 @@ public class AdminController {
     }
 
     @PostMapping("/car/add")
-    public String addCar(Car car) {
+    public String addCar(CarDTO car) {
         carService.save(car);
         return "redirect:/admin/cars";
     }
 
     @GetMapping("cars")
     public String carListView(Model model) {
-        List<Car> carList = carService.findAll();
+        List<CarDTO> carList = carService.findAll();
         model.addAttribute("carList", carList);
         return "carsList";
     }
@@ -53,7 +54,7 @@ public class AdminController {
 
     @GetMapping("/car/edit/{carId}")
     public String carEdit(@PathVariable Long carId, Model model) {
-        Car car = carService.getCarById(carId);
+        CarDTO car = carService.getCarById(carId);
         model.addAttribute("car", car);
         return "carEdit";
     }
@@ -68,7 +69,7 @@ public class AdminController {
             @RequestParam String category,
             @RequestParam int year
     ) {
-        Car car = carService.getCarById(carId);
+        CarDTO car = carService.getCarById(carId);
         car.setColor(color);
         car.setModel(model);
         car.setPlate_num(plate_num);
@@ -82,14 +83,14 @@ public class AdminController {
 
     @GetMapping("/users")
     public String userList(Model model) {
-        List<User> userList = userService.findAll();
+        List<UserDTO> userList = userService.findAll();
         model.addAttribute("userList", userList);
         return "userList";
     }
 
     @PostMapping("/user/delAdmin")
     public String deleteAdminRole(@PathVariable Long userId) {
-        User user = userService.findUserById(userId);
+        UserDTO user = userService.findUserById(userId);
         userService.deleteAdminRole(user);
         userService.save(user);
         if (userId.equals(userService.findUserById(userId).getId())) {
@@ -100,7 +101,7 @@ public class AdminController {
 
     @PostMapping("/user/addAdmin")
     public String addAdminRole(@PathVariable Long userId) {
-        User user = userService.findUserById(userId);
+        UserDTO user = userService.findUserById(userId);
         userService.addAdminRole(user);
         userService.save(user);
         return "redirect:/admin/users";

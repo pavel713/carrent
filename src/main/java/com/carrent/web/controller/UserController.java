@@ -2,6 +2,7 @@ package com.carrent.web.controller;
 
 import com.carrent.dao.entities.Role;
 import com.carrent.dao.entities.User;
+import com.carrent.dto.UserDTO;
 import com.carrent.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +30,7 @@ public class UserController {
     }
 
     @PostMapping("/registration")
-    public String addUser(User user, Model model) {
+    public String addUser(UserDTO user, Model model) {
         if (userService.isExists(user)) {
             model.addAttribute("message", "User Already exist");
             return "/registration";

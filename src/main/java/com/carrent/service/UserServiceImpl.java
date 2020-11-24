@@ -3,6 +3,7 @@ package com.carrent.service;
 import com.carrent.dao.entities.Role;
 import com.carrent.dao.entities.User;
 import com.carrent.dao.repository.UserRepository;
+import com.carrent.dto.UserDTO;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,8 +14,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -30,8 +31,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 
     @Override
-    public void save(User user) throws DataAccessException {
+    public void save(UserDTO userDto) throws DataAccessException {
         try {
+            User user = new User(userDto);
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepository.save(user);
         } catch (DataAccessException e) {
@@ -50,12 +52,37 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     }
 
+    @Override
+    public List<UserDTO> findAll() throws DataAccessException {
+        try {
+
+            return userRepository.findAll()
+                    .stream()
+                    .map(UserDTO::new)
+                    .collect(Collectors.toList());
+        } catch (DataAccessException e) {
+            throw new ServiceException("message", e);
+        }
+
+    }
 
     @Override
-    public List<User> findAll() throws DataAccessException {
+    public UserDTO findUserById(Long id) throws DataAccessException {
+        try {
+            User userById = userRepository.findUserById(id);
+            return new UserDTO(userById);
+        } catch (DataAccessException e) {
+            throw new ServiceException("message", e);
+        }
+
+    }
+
+    @Override
+    public UserDTO findUserByUsername(String name) throws DataAccessException {
         try {
             userRepository.findAll();
-            return userRepository.findAll();
+            return (UserDTO) userRepository.findAll().stream()
+                    .map(UserDTO::new);
         } catch (DataAccessException e) {
             throw new ServiceException("message", e);
         }
@@ -63,29 +90,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User findUserById(Long id) throws DataAccessException {
-        try {
-            userRepository.findUserById(id);
-            return userRepository.findUserById(id);
-        } catch (DataAccessException e) {
-            throw new ServiceException("message", e);
-        }
-
-    }
-
-    @Override
-    public User findUserByUsername(String name) throws DataAccessException {
-        try {
-            userRepository.findByUsername(name);
-            return userRepository.findByUsername(name);
-        } catch (DataAccessException e) {
-            throw new ServiceException("message", e);
-        }
-
-    }
-
-    @Override
-    public boolean isExists(User user) throws DataAccessException {
+    public boolean isExists(UserDTO user) throws DataAccessException {
         try {
             userRepository.findAll();
             return userRepository.findAll().stream()
@@ -98,12 +103,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public void deleteAdminRole(User user) {
+    public void deleteAdminRole(UserDTO user) {
         user.getRoles().remove(Role.ADMIN);
     }
 
     @Override
-    public void addAdminRole(User user) {
+    public void addAdminRole(UserDTO user) {
         user.getRoles().add(Role.ADMIN);
     }
 

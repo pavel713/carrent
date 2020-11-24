@@ -23,8 +23,8 @@
         <input class="form-control is is-valid" id="year" required th:field="*{year}" type="number">
         <label for="category" th:text="#{car.category}"></label>
         <select class="form-control" id="category" name="category">
-            <option th:text="#{category.econom}" value="ECONOM"></option>
-            <option th:text="#{category.standart}" value="STANDART"></option>
+            <option th:text="#{category.economy}" value="ECONOMY"></option>
+            <option th:text="#{category.standard}" value="STANDARD"></option>
             <option th:text="#{category.luxury}" value="LUXURY"></option>
         </select>
         <input name="_csrf" th:value="${_csrf.token}" type="hidden"/>

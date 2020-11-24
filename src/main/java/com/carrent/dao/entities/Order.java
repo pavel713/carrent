@@ -1,7 +1,7 @@
 package com.carrent.dao.entities;
 
+import com.carrent.dto.OrderDTO;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -9,7 +9,6 @@ import java.util.Date;
 import java.util.Set;
 
 
-@NoArgsConstructor
 @AllArgsConstructor
 
 @Entity
@@ -28,12 +27,17 @@ public class Order {
     @Column(name = "end_date")
     private Date endDate;
 
-    @Column(name="cost")
+    @Column(name = "cost")
     private double cost;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User users;
+
+
+    public Order() {
+
+    }
 
     public Long getId() {
         return id;
@@ -97,6 +101,13 @@ public class Order {
     private Set<Car> cars;
 
 
+    public Order(OrderDTO order) {
+        this.id = order.getId();
+        this.startDate = order.getStartDate();
+        this.endDate = order.getEndDate();
+        this.cost = order.getCost();
+        this.users = order.getUsers();
+    }
 }
 
 

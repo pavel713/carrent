@@ -1,19 +1,19 @@
 package com.carrent.service;
 
-import com.carrent.dao.entities.Order;
+import com.carrent.dto.OrderDTO;
 
 import java.util.Date;
 import java.util.List;
 
 public interface OrderService {
 
-    void save(Order order);
+    void save(OrderDTO order);
 
     void delete(Long id);
 
-    List<Order> findAll();
+    List<OrderDTO> findAll();
 
-    Order findOrderById(Long id);
+    OrderDTO findOrderById(Long id);
 
     long calculateDateInterval(Date startDate, Date endDate);
 

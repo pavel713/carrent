@@ -3,7 +3,7 @@ package com.carrent.service;
 import com.carrent.dao.entities.Car;
 import com.carrent.dao.entities.Category;
 import com.carrent.dao.repository.CarRepository;
-import com.carrent.dto.CarDto;
+import com.carrent.dto.CarDTO;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;

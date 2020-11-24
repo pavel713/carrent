@@ -3,6 +3,7 @@ package com.carrent.service;
 import com.carrent.dao.entities.Order;
 import com.carrent.dao.repository.CarRepository;
 import com.carrent.dao.repository.OrderRepository;
+import com.carrent.dto.OrderDTO;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -26,8 +28,9 @@ public class OrderServiceImpl implements OrderService {
 
 
     @Override
-    public void save(Order order) throws DataAccessException {
+    public void save(OrderDTO orderDto) throws DataAccessException {
         try {
+            Order order = new Order(orderDto);
             orderRepository.save(order);
         } catch (DataAccessException e) {
             throw new ServiceException("message", e);
@@ -44,10 +47,10 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> findAll() throws DataAccessException {
+    public List<OrderDTO> findAll() throws DataAccessException {
         try {
-            orderRepository.findAll();
-            return orderRepository.findAll();
+            List<Order> allOrders = orderRepository.findAll();
+            return allOrders.stream().map(OrderDTO::new).collect(Collectors.toList());
         } catch (DataAccessException e) {
             throw new ServiceException("message", e);
         }
@@ -56,10 +59,10 @@ public class OrderServiceImpl implements OrderService {
 
 
     @Override
-    public Order findOrderById(Long id) throws DataAccessException {
+    public OrderDTO findOrderById(Long id) throws DataAccessException {
         try {
-            orderRepository.findOrderById(id);
-            return orderRepository.findOrderById(id);
+            Order orderById = orderRepository.findOrderById(id);
+            return new OrderDTO(orderById);
         } catch (DataAccessException e) {
             throw new ServiceException("message", e);
         }

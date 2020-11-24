@@ -2,6 +2,7 @@ package com.carrent.service;
 
 
 import com.carrent.dao.entities.User;
+import com.carrent.dto.UserDTO;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 
@@ -10,21 +11,21 @@ import java.util.List;
 public interface UserService extends UserDetailsService {
 
 
-    void save(User user);
+    void save(UserDTO user);
 
     void delete(Long id);
 
-    List<User> findAll();
+    List<UserDTO> findAll();
 
-    User findUserById(Long id);
+    UserDTO findUserById(Long id);
 
-    User findUserByUsername(String name);
+    UserDTO findUserByUsername(String name);
 
-    boolean isExists(User user);
+    boolean isExists(UserDTO user);
 
-    void deleteAdminRole(User user);
+    void deleteAdminRole(UserDTO user);
 
-    void addAdminRole(User user);
+    void addAdminRole(UserDTO user);
 
     User getUserFromSecurityContext();
 
