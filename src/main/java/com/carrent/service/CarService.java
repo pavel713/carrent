@@ -17,7 +17,4 @@ public interface CarService {
 
     List<CarDTO> findCarByCategory(Category category);
 
-    CarDto carToDto(Car car);
-
-    Car DtoToCar(CarDto carDto);
 }

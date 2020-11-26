@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -18,17 +19,16 @@ public class CarsServiceImpl implements CarService {
 
     private final CarRepository carRepository;
 
-
     @Autowired
     public CarsServiceImpl(CarRepository carRepository) {
         this.carRepository = carRepository;
-
     }
 
 
     @Override
-    public void save(Car car) throws DataAccessException {
+    public void save(CarDTO carDto) throws DataAccessException {
         try {
+            Car car = new Car(carDto);
             carRepository.save(car);
         } catch (DataAccessException e) {
             throw new ServiceException("message", e);
@@ -45,54 +45,37 @@ public class CarsServiceImpl implements CarService {
     }
 
     @Override
-    public List<Car> findAll() throws DataAccessException {
+    public List<CarDTO> findAll() throws DataAccessException {
         try {
-            carRepository.findAll();
-            return carRepository.findAll();
+            List<Car> all = carRepository.findAll();
+            return all.stream().map(CarDTO::new).collect(Collectors.toList());
+        } catch (DataAccessException e) {
+            throw new ServiceException("message", e);
+        }
+    }
+
+
+    @Override
+    public CarDTO getCarById(Long id) throws DataAccessException {
+        try {
+            Car carById = carRepository.findCarById(id);
+            return new CarDTO(carById);
+        } catch (DataAccessException e) {
+            throw new ServiceException("message", e);
+        }
+    }
+
+    @Override
+    public List<CarDTO> findCarByCategory(Category category) throws DataAccessException {
+        try {
+            List<Car> carByCategory = carRepository.findCarByCategory(category);
+            return carByCategory.stream().map(CarDTO::new).collect(Collectors.toList());
         } catch (DataAccessException e) {
             throw new ServiceException("message", e);
 
         }
     }
 
-
-    @Override
-    public Car getCarById(Long id) throws DataAccessException {
-        try {
-            carRepository.findCarById(id);
-            return carRepository.findCarById(id);
-        } catch (DataAccessException e) {
-            throw new ServiceException("message", e);
-        }
-
-    }
-
-
-    @Override
-    public List<Car> findCarByCategory(Category category) throws DataAccessException {
-        try {
-            carRepository.findCarByCategory(category);
-            return carRepository.findCarByCategory(category);
-        } catch (DataAccessException e) {
-            throw new ServiceException("message", e);
-
-        }
-
-    }
-
-    @Override
-    public CarDto carToDto(Car car) {
-     CarDto carDto = new CarDto(car);
-     return carDto;
-
-
-    }
-
-    @Override
-    public Car DtoToCar(CarDto carDto) {
-        Car car = new Car(carDto);
-        return car;
-    }
 }
 
 

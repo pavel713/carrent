@@ -1,32 +1,30 @@
 package com.carrent.web.controller;
 
-import com.carrent.dao.entities.Car;
-import com.carrent.dto.CarDto;
+import com.carrent.dto.CarDTO;
 import com.carrent.service.CarService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
+@RequestMapping("/cars")
 public class CarController {
 
     private final CarService carService;
 
-
     public CarController(CarService carService) {
         this.carService = carService;
-
     }
 
+    @GetMapping()
 
-    @GetMapping("/cars")
-    public List<CarDto> findAllCars(Car car) {
-        return carService.findAll()
-                .stream()
-                .map(carService::carToDto).collect(Collectors.toList());
-
+    public String findAllCars(Model model) {
+        List<CarDTO> cars = carService.findAll();
+        model.addAttribute("carList", cars);
+        return "carsList";
     }
 }
 

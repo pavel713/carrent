@@ -1,6 +1,5 @@
 package com.carrent.web.controller;
 
-import com.carrent.dao.entities.Car;
 import com.carrent.dao.entities.Category;
 import com.carrent.dto.CarDTO;
 import com.carrent.service.CarService;
