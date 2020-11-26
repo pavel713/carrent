@@ -1,6 +1,6 @@
 package com.carrent.web.config;
 
-import com.carrent.service.UserService;
+import com.carrent.service.UserAuthService;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -17,7 +17,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
 
-    public SecurityConfig(UserService userDetailsService) {
+    public SecurityConfig(UserAuthService userDetailsService) {
         this.userDetailsService = userDetailsService;
 
     }

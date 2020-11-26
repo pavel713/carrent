@@ -2,6 +2,7 @@ package com.carrent.dto;
 
 import com.carrent.dao.entities.Order;
 import com.carrent.dao.entities.User;
+import com.carrent.dao.entities.UserAuth;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

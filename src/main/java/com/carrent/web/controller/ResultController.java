@@ -1,9 +1,8 @@
 package com.carrent.web.controller;
 
 import com.carrent.dao.entities.Order;
-import com.carrent.dao.entities.User;
-import com.carrent.service.CarService;
-import com.carrent.service.OrderService;
+import com.carrent.dao.entities.UserAuth;
+import com.carrent.service.UserAuthService;
 import com.carrent.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,16 +13,17 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @SessionAttributes({"car", "order"})
 public class ResultController {
 
-    private final UserService userService;
+    private final UserAuthService userAuthService;
 
-    public ResultController(UserService userService) {
-        this.userService = userService;
+    public ResultController(UserService userService, UserAuthService userAuthService) {
+        this.userAuthService = userAuthService;
+
     }
 
 
     @GetMapping("/result")
-    public String showFinalPage(Model model, User user, Order orderId) {
-        User currentUser = userService.getUserFromSecurityContext();
+    public String showFinalPage(Model model, UserAuth user, Order orderId) {
+        UserAuth currentUser = userAuthService.getUserFromSecurityContext();
         model.addAttribute("user", user);
         model.addAttribute("order", orderId);
         return "result";

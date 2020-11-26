@@ -6,10 +6,6 @@ import com.carrent.dao.repository.UserRepository;
 import com.carrent.dto.UserDTO;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.dao.DataAccessException;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
-public class UserServiceImpl implements UserService, UserDetailsService {
+public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
@@ -52,6 +48,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     }
 
+
     @Override
     public List<UserDTO> findAll() throws DataAccessException {
         try {
@@ -66,23 +63,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     }
 
+
     @Override
     public UserDTO findUserById(Long id) throws DataAccessException {
         try {
             User userById = userRepository.findUserById(id);
             return new UserDTO(userById);
-        } catch (DataAccessException e) {
-            throw new ServiceException("message", e);
-        }
-
-    }
-
-    @Override
-    public UserDTO findUserByUsername(String name) throws DataAccessException {
-        try {
-            userRepository.findAll();
-            return (UserDTO) userRepository.findAll().stream()
-                    .map(UserDTO::new);
         } catch (DataAccessException e) {
             throw new ServiceException("message", e);
         }
@@ -112,30 +98,5 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.getRoles().add(Role.ADMIN);
     }
 
-    @Override
-    public User getUserFromSecurityContext() throws DataAccessException {
-        try {
-            String username = getUserDetails().getUsername();
-            return userRepository.findByUsername(username);
-        } catch (DataAccessException e) {
-            throw new ServiceException("message", e);
-        }
-    }
 
-    @Override
-    public User getUserDetails() {
-        return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
-        try {
-            userRepository.findByUsername(username);
-            return userRepository.findByUsername(username);
-        } catch (DataAccessException e) {
-            throw new ServiceException("message", e);
-        }
-
-
-    }
 }

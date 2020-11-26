@@ -27,7 +27,6 @@ public class CostController {
     @GetMapping("/cost")
     public String setCost(Model model, Car car) {
         model.addAttribute("carById", car);
-
         return "cost";
     }
 

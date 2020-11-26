@@ -6,6 +6,7 @@ import com.carrent.dto.CarDTO;
 import com.carrent.service.CarService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -23,18 +24,18 @@ public class MainController {
         return "main";
     }
 
-    @GetMapping("/cars-economy")
+    @GetMapping("cars/economy")
     public List<CarDTO> showEconomyCarsPage() {
         return carService.findCarByCategory(Category.ECONOMY);
     }
 
 
-    @GetMapping("/cars-standard")
+    @GetMapping("cars/standard")
     public List<CarDTO> showStandardCarsPage() {
         return carService.findCarByCategory(Category.STANDARD);
     }
 
-    @GetMapping("/cars-luxury")
+    @GetMapping("cars/luxury")
     public List<CarDTO> showLuxuryCarsPage() {
         return carService.findCarByCategory(Category.LUXURY);
     }
