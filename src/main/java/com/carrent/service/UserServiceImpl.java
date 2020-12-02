@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,11 +20,13 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final MailServiceImpl mailService;
 
 
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, MailServiceImpl mailService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.mailService = mailService;
     }
 
 
@@ -33,6 +36,16 @@ public class UserServiceImpl implements UserService {
             User user = new User(userDto);
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepository.save(user);
+            if (!StringUtils.isEmpty(user.getEmail())) {
+                String message = String.format(
+                        "Hello, %s! \n" +
+                                "Welcome to Car rent service. Please, visit next link: https://carrentservice-app.herokuapp.com/",
+                        user.getUsername()
+                );
+                mailService.sendMail(user.getEmail(), "Successful registration", message);
+
+            }
+
         } catch (DataAccessException e) {
             throw new ServiceException("message", e);
 
