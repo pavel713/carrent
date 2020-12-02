@@ -1,7 +1,6 @@
 package com.carrent.web.controller;
 
 import com.carrent.dao.entities.Role;
-import com.carrent.dao.entities.User;
 import com.carrent.dto.UserDTO;
 import com.carrent.service.UserService;
 import org.springframework.stereotype.Controller;

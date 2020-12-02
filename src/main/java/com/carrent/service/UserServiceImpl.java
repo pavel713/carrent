@@ -6,6 +6,7 @@ import com.carrent.dao.repository.UserRepository;
 import com.carrent.dto.UserDTO;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.dao.DataAccessException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -75,6 +76,17 @@ public class UserServiceImpl implements UserService {
 
     }
 
+
+    @Override
+    public UserDTO findUserByName(String name) {
+        try {
+            User userById = userRepository.findByUsername(name);
+            return new UserDTO(userById);
+        } catch (DataAccessException e) {
+            throw new ServiceException("message", e);
+        }
+    }
+
     @Override
     public boolean isExists(UserDTO user) throws DataAccessException {
         try {
@@ -98,5 +110,10 @@ public class UserServiceImpl implements UserService {
         user.getRoles().add(Role.ADMIN);
     }
 
-
+    @Override
+    public UserDTO getCurrentUser() {
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        User byUsername = userRepository.findByUsername(name);
+        return new UserDTO(byUsername);
+    }
 }

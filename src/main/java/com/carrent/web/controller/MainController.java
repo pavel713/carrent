@@ -4,6 +4,7 @@ import com.carrent.dao.entities.Category;
 import com.carrent.dto.CarDTO;
 import com.carrent.service.CarService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
@@ -23,19 +24,24 @@ public class MainController {
     }
 
     @GetMapping("cars/economy")
-    public List<CarDTO> showEconomyCarsPage() {
-        return carService.findCarByCategory(Category.ECONOMY);
+    public String showEconomyCarsPage(Model model) {
+        List<CarDTO> carByCategory = carService.findCarByCategory(Category.ECONOMY);
+        model.addAttribute("carList", carByCategory);
+        return "cars-economy";
     }
 
-
     @GetMapping("cars/standard")
-    public List<CarDTO> showStandardCarsPage() {
-        return carService.findCarByCategory(Category.STANDARD);
+    public String showStandardCarsPage(Model model) {
+        List<CarDTO> carByCategory = carService.findCarByCategory(Category.STANDARD);
+        model.addAttribute("carList", carByCategory);
+        return "cars-standard";
     }
 
     @GetMapping("cars/luxury")
-    public List<CarDTO> showLuxuryCarsPage() {
-        return carService.findCarByCategory(Category.LUXURY);
+    public String showLuxuryCarsPage(Model model) {
+        List<CarDTO> carByCategory = carService.findCarByCategory(Category.LUXURY);
+        model.addAttribute("carList", carByCategory);
+        return "cars-luxury";
     }
 }
 

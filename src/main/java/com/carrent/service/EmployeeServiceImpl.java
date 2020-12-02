@@ -40,7 +40,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<Employee> findAll() throws DataAccessException {
         try {
-            employeeRepository.findAll();
             return employeeRepository.findAll();
         } catch (DataAccessException e) {
             throw new ServiceException("message", e);
@@ -51,7 +50,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee findEmployeeById(Long id) throws DataAccessException {
         try {
-            employeeRepository.findEmployeeById(id);
             return employeeRepository.findEmployeeById(id);
         } catch (DataAccessException e) {
             throw new ServiceException("message", e);

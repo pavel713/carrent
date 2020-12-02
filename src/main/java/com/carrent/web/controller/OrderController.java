@@ -1,14 +1,10 @@
 package com.carrent.web.controller;
 
-import com.carrent.dao.entities.Order;
-import com.carrent.dao.entities.User;
-import com.carrent.dao.entities.UserAuth;
 import com.carrent.dto.CarDTO;
 import com.carrent.dto.OrderDTO;
 import com.carrent.dto.UserDTO;
 import com.carrent.service.CarService;
 import com.carrent.service.OrderService;
-import com.carrent.service.UserAuthService;
 import com.carrent.service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,23 +13,23 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@SessionAttributes({"car", "order"})
+@SessionAttributes({"carDTO", "orderDTO"})
 public class OrderController {
 
     private final CarService carService;
     private final OrderService orderService;
-    private final UserAuthService userAuthService;
+    private final UserService userService;
 
 
-    public OrderController(CarService carService, OrderService orderService, UserService userService, UserAuthService userAuthService) {
+    public OrderController(CarService carService, OrderService orderService, UserService userService) {
         this.carService = carService;
         this.orderService = orderService;
-        this.userAuthService = userAuthService;
+        this.userService =userService;
     }
 
     @ModelAttribute("currentUser")
-    public UserAuth getCurrentUser() {
-        return userAuthService.getUserFromSecurityContext();
+    public UserDTO getCurrentUser() {
+        return userService.getCurrentUser();
     }
 
 
@@ -43,18 +39,19 @@ public class OrderController {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName();
-        UserAuth user = userAuthService.findUserByUsername(name);
-        model.addAttribute("userId", user);
+        UserDTO userByName = userService.findUserByName(name);
+        model.addAttribute("userId", userByName);
         model.addAttribute("car", car);
-        model.addAttribute("order", new Order());
+        model.addAttribute("order", new OrderDTO());
         return "order";
     }
 
 
     @PostMapping("order/submit")
     public String submitOrder(OrderDTO order){
-//        UserAuth user = userAuthService.getUserFromSecurityContext();
-//        order.setUsers(user);
+
+        UserDTO userAuth = getCurrentUser();
+        userService.save(userAuth);
         orderService.save(order);
         return "redirect:/cost";
     }

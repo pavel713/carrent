@@ -12,9 +12,11 @@ public interface UserService {
 
     void delete(Long id);
 
-   List<UserDTO> findAll();
+    List<UserDTO> findAll();
 
     UserDTO findUserById(Long id);
+
+    UserDTO findUserByName(String name);
 
     boolean isExists(UserDTO user);
 
@@ -22,9 +24,7 @@ public interface UserService {
 
     void addAdminRole(UserDTO user);
 
-
-
-
+    UserDTO getCurrentUser();
 
 
 }

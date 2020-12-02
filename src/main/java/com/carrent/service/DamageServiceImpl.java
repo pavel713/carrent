@@ -41,7 +41,6 @@ public class DamageServiceImpl implements DamageService {
     @Override
     public List<Damage> findAll() throws DataAccessException {
         try {
-            damageRepository.findAll();
             return damageRepository.findAll();
         } catch (DataAccessException e) {
             throw new ServiceException("message", e);
@@ -52,7 +51,6 @@ public class DamageServiceImpl implements DamageService {
     @Override
     public Damage findDamageById(Long id) throws DataAccessException {
         try {
-            damageRepository.findDamageById(id);
             return damageRepository.findDamageById(id);
         } catch (DataAccessException e) {
             throw new ServiceException("message", e);
