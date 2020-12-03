@@ -32,6 +32,7 @@ public class UserController {
     public String addUser(UserDTO user, Model model) {
         if (userService.isExists(user)) {
             model.addAttribute("message", "User Already exist");
+            model.addAttribute("user", user);
             return "/registration";
         }
         user.setRoles(Collections.singleton(Role.USER));
