@@ -33,7 +33,7 @@ public class UserController {
         if (userService.isExists(user)) {
             model.addAttribute("message", "User Already exist");
             model.addAttribute("user", user);
-            return "/registration";
+            return "registration";
         }
         user.setRoles(Collections.singleton(Role.USER));
         userService.save(user);
