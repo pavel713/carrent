@@ -23,21 +23,21 @@ public class MainController {
         return "main";
     }
 
-    @GetMapping("cars/economy")
+    @GetMapping("/cars/economy")
     public String showEconomyCarsPage(Model model) {
         List<CarDTO> carByCategory = carService.findCarByCategory(Category.ECONOMY);
         model.addAttribute("carList", carByCategory);
         return "cars-economy";
     }
 
-    @GetMapping("cars/standard")
+    @GetMapping("/cars/standard")
     public String showStandardCarsPage(Model model) {
         List<CarDTO> carByCategory = carService.findCarByCategory(Category.STANDARD);
         model.addAttribute("carList", carByCategory);
         return "cars-standard";
     }
 
-    @GetMapping("cars/luxury")
+    @GetMapping("/cars/luxury")
     public String showLuxuryCarsPage(Model model) {
         List<CarDTO> carByCategory = carService.findCarByCategory(Category.LUXURY);
         model.addAttribute("carList", carByCategory);

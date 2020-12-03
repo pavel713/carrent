@@ -37,7 +37,7 @@ public class UserController {
         }
         user.setRoles(Collections.singleton(Role.USER));
         userService.save(user);
-        return "redirect:login";
+        return "redirect:/login";
 
     }
 

@@ -47,7 +47,7 @@ public class OrderController {
     }
 
 
-    @PostMapping("order/submit")
+    @PostMapping("/order/submit")
     public String submitOrder(OrderDTO order){
         UserDTO userAuth = getCurrentUser();
         userService.save(userAuth);

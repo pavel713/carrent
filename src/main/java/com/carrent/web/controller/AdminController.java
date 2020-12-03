@@ -39,17 +39,17 @@ public class AdminController {
         return "redirect:/admin/cars";
     }
 
-    @GetMapping("cars")
+    @GetMapping("/cars")
     public String carListView(Model model) {
         List<CarDTO> carList = carService.findAll();
         model.addAttribute("carList", carList);
         return "carsList";
     }
 
-    @PostMapping("car/delete/{carId}")
+    @PostMapping("/car/delete/{carId}")
     public String deleteCar(@PathVariable Long carId) {
         carService.delete(carId);
-        return "redirect:admin/cars";
+        return "redirect:/admin/cars";
     }
 
     @GetMapping("/car/edit/{carId}")
