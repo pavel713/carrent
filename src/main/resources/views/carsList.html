@@ -40,6 +40,11 @@
         </tr>
         </tbody>
     </table>
+
+    <form action="/cars/excel" >
+        <input name="_csrf" th:value="${_csrf.token}" type="hidden"/>
+        <button class="btn btn-primary mt-2" th:text="#{download.excel}" type="submit"></button>
+    </form>
 </div>
 </body>
 </html>
