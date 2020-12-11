@@ -1,5 +1,6 @@
 package com.carrent.web.controller;
 
+import com.carrent.dao.entities.User;
 import com.carrent.dto.CarDTO;
 import com.carrent.dto.OrderDTO;
 import com.carrent.dto.UserDTO;
@@ -10,10 +11,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@SessionAttributes({"carDTO", "orderDTO"})
+
 public class OrderController {
 
     private final CarService carService;
@@ -24,7 +29,7 @@ public class OrderController {
     public OrderController(CarService carService, OrderService orderService, UserService userService) {
         this.carService = carService;
         this.orderService = orderService;
-        this.userService =userService;
+        this.userService = userService;
     }
 
     @ModelAttribute("currentUser")
@@ -35,23 +40,24 @@ public class OrderController {
 
     @GetMapping("/order")
     public String setOrder(@RequestParam("carId") Long carId, Model model) {
-        CarDTO car = carService.getCarById(carId);
+        CarDTO carById = carService.getCarById(carId);
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName();
         UserDTO userByName = userService.findUserByName(name);
         model.addAttribute("userId", userByName);
-        model.addAttribute("car", car);
+        model.addAttribute("carById", carById);
         model.addAttribute("order", new OrderDTO());
         return "order";
     }
 
 
     @PostMapping("/order/submit")
-    public String submitOrder(OrderDTO order){
-        UserDTO userAuth = getCurrentUser();
-        userService.save(userAuth);
+    public String submitOrder(OrderDTO order, User user, RedirectAttributes redirectAttributes,
+                              @RequestParam(value = "car_id") Long CarId) {
+
         orderService.save(order);
+        redirectAttributes.addAttribute("car_id", CarId);
         return "redirect:/cost";
     }
 }

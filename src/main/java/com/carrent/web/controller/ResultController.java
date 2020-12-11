@@ -1,6 +1,7 @@
 package com.carrent.web.controller;
 
 import com.carrent.dao.entities.Order;
+import com.carrent.dto.OrderDTO;
 import com.carrent.dto.UserDTO;
 import com.carrent.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -20,10 +21,10 @@ public class ResultController {
 
 
     @GetMapping("/result")
-    public String showFinalPage(Model model, Order orderId) {
+    public String showFinalPage(Model model, OrderDTO order) {
         UserDTO currentUser = userService.getCurrentUser();
         model.addAttribute("user", currentUser);
-        model.addAttribute("order", orderId);
+        model.addAttribute("order", order);
         return "result";
     }
 }

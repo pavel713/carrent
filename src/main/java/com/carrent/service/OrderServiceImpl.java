@@ -1,11 +1,14 @@
 package com.carrent.service;
 
 import com.carrent.dao.entities.Order;
-import com.carrent.dao.repository.CarRepository;
+import com.carrent.dao.entities.User;
 import com.carrent.dao.repository.OrderRepository;
+import com.carrent.dao.repository.UserRepository;
 import com.carrent.dto.OrderDTO;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.dao.DataAccessException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,19 +19,18 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
-
-    public OrderServiceImpl(OrderRepository orderRepository) {
-        this.orderRepository = orderRepository;
-    }
-
+    private final UserService userService;
 
     @Override
     public void save(OrderDTO orderDto) throws DataAccessException {
         try {
+            User currentUserEntity = userService.getCurrentUserEntity();
             Order order = new Order(orderDto);
+            order.setUsers(currentUserEntity);
             orderRepository.save(order);
         } catch (DataAccessException e) {
             throw new ServiceException("message", e);

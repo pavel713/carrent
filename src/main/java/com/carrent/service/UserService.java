@@ -1,6 +1,7 @@
 package com.carrent.service;
 
 
+import com.carrent.dao.entities.User;
 import com.carrent.dto.UserDTO;
 
 import java.util.List;
@@ -26,6 +27,7 @@ public interface UserService {
 
     UserDTO getCurrentUser();
 
+    User getCurrentUserEntity();
 
 }
 

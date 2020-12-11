@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Order page</title>
-    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <h2 align="center" th:text="#{total.price}"></h2>
@@ -19,14 +18,12 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="car : ${carById}">
-            <td><span th:text="${car.model}"></span></td>
-            <td><span th:text="${car.year}"></span></td>
-            <td><span th:text="'$ ' + ${car.price}"></span></td>
-        </tr>
-        <th scope="row" th:text="#{total.price}"></th>
-        <td><span th:text="'$ '+${totalPrice}"></span></td>
-        <td></td>
+
+            <td><span th:text="${carById.model}"></span></td>
+            <td><span th:text="${carById.year}"></span></td>
+            <td><span th:text="'$ ' + ${carById.price}"></span></td>
+
+
         <td>
             <form action="/cost" th:object="${order}" method="post">
                 <div class="container ml-auto">

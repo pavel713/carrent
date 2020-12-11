@@ -129,4 +129,10 @@ public class UserServiceImpl implements UserService {
         User byUsername = userRepository.findByUsername(name);
         return new UserDTO(byUsername);
     }
+
+    @Override
+    public User getCurrentUserEntity() {
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        return userRepository.findByUsername(name);
+    }
 }

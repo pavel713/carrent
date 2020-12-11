@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Result Page page</title>
-    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <h2 align="center" th:text="#{order.info}"></h2>
@@ -14,6 +13,7 @@
         <h3 th:text="${car.year}"></h3>
         <h5 th:text="${order.startDate}"></h5>
         <h5 th:text="${order.endDate}"></h5>
+        <h5 th:text="${user.username}"></h5>
         <h5 th:text="'Price: '+${car.price}+ ' USD / day'"></h5>
     </div>
 </div>
