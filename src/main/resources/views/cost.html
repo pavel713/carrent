@@ -18,15 +18,13 @@
         </tr>
         </thead>
         <tbody>
-
             <td><span th:text="${carById.model}"></span></td>
             <td><span th:text="${carById.year}"></span></td>
             <td><span th:text="'$ ' + ${carById.price}"></span></td>
-
-
         <td>
-            <form action="/cost" th:object="${order}" method="post">
+            <form action="/cost" th:object="${order.setCost(carById.id)}" method="post">
                 <div class="container ml-auto">
+                    <input type="hidden" class="form-control" th:id="carById">
                     <input name="_csrf" th:value="${_csrf.token}" type="hidden"/>
                     <button class="btn btn-primary mt-2" th:text="#{order.submit}" type="submit"></button>
                 </div>

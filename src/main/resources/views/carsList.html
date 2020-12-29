@@ -45,9 +45,8 @@
         <button class="btn btn-primary mt-2" th:text="#{download.excel}" type="submit"></button>
     </form>
 
-
-
     <form method="POST" action="/cars/load" enctype="multipart/form-data">
+        <input name="_csrf" th:value="${_csrf.token}" type="hidden"/>
         <input type="file" name="file"/><br/><br/>
         <button class="btn btn-primary mt-2" th:text="#{load.excel}" type="submit"></button>
     </form>

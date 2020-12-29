@@ -1,29 +1,27 @@
 package com.carrent.dao.entities;
 
 import com.carrent.dto.CarDTO;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
 
 
+
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
 
+@Data
 @Entity
 @Table(name = "car")
 public class Car {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
+    @EqualsAndHashCode.Exclude
     private Long id;
+
     @Column(name = "model")
     private String model;
 
@@ -41,15 +39,17 @@ public class Car {
 
 
     @Column(name = "price")
-    private int price;
+    private long price;
 
     @Column(name = "category")
     @Enumerated(EnumType.STRING)
     private Category category;
 
-    @ManyToMany(mappedBy = "cars")
-    private Set<Order> order;
+    @EqualsAndHashCode.Exclude
+    @OneToOne
+    private Order order;
 
+    @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "car", fetch = FetchType.EAGER)
     private List<Damage> damages;
 

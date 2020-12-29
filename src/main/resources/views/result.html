@@ -2,30 +2,30 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Result Page page</title>
+    <title>Result Page</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<h2 align="center" th:text="#{order.info}"></h2>
+<h2 th:text="#{order.info}"></h2>
 <div class="col-sm-9">
     <div class="caption">
         <h3 th:text="${car.model}"></h3>
         <h3 th:text="${car.year}"></h3>
+        <h3 th:text="${car.id}"></h3>
         <h5 th:text="${order.startDate}"></h5>
         <h5 th:text="${order.endDate}"></h5>
         <h5 th:text="${user.username}"></h5>
         <h5 th:text="'Price: '+${car.price}+ ' USD / day'"></h5>
     </div>
 </div>
-</div>
+
 <h4>Your data:</h4>
 <hr>
 <div class="row">
     <div class="col-sm-9">
         <div class="caption">
-            <h5 th:text="#{borrowed.date}' '+${order.startDate}+
-                    ' - ' +${order.endDate}"></h5>
-            <h5 th:text="#{total.price}' '+${order.cost}+ ' USD'"></h5>
+            <h5 th:text="#{borrowed.date}' '+${order.startDate}+' '+${order.endDate}"></h5>
+            <h5 th:text="#{total.price}' '+${order.cost}+ 'USD'"></h5>
         </div>
     </div>
 </div>

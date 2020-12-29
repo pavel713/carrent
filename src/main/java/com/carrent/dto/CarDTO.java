@@ -21,7 +21,7 @@ public class CarDTO {
 
     private int year;
 
-    private int price;
+    private long price;
 
     private Category category;
 
@@ -39,5 +39,6 @@ public class CarDTO {
         this.category = carDto.getCategory();
 
     }
+
 
 }

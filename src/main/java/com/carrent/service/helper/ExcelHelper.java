@@ -1,26 +1,36 @@
 package com.carrent.service.helper;
 
 import com.carrent.dao.entities.Car;
-import com.carrent.dto.CarDTO;
+import com.carrent.dao.entities.Category;
+import com.carrent.service.CarService;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
+@Service
 public class ExcelHelper {
+
     public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
     static String[] HEADERs = { "Id", "Color", "Model", "PLate Number", "Price", "Year" };
     static String SHEET = "Cars";
+
+    @Autowired
+    private CarService carService;
+
 
     public static ByteArrayInputStream carsToExcel(List<Car> cars) {
 
@@ -39,12 +49,12 @@ public class ExcelHelper {
             for (Car car : cars) {
                 Row row = sheet.createRow(rowIdx++);
 
-                row.createCell(0).setCellValue(car.getId());
-                row.createCell(1).setCellValue(car.getColor());
-                row.createCell(2).setCellValue(car.getModel());
-                row.createCell(3).setCellValue(car.getPlate_num());
-                row.createCell(4).setCellValue(car.getPrice());
-                row.createCell(5).setCellValue(car.getYear());
+                row.createCell(0).setCellValue(car.getColor());
+                row.createCell(1).setCellValue(car.getModel());
+                row.createCell(2).setCellValue(car.getPlate_num());
+                row.createCell(3).setCellValue(car.getPrice());
+                row.createCell(4).setCellValue(car.getYear());
+                row.createCell(5).setCellValue(car.getCategory().toString());
 
             }
 
@@ -53,17 +63,23 @@ public class ExcelHelper {
         } catch (IOException e) {
             throw new RuntimeException("fail to import data to Excel file: " + e.getMessage());
         }
+
     }
 
 
-    public static List<Car> excelToCars(InputStream is) {
+    public static Set<Car> excelToCars(InputStream is) {
+
+
+
         try {
             Workbook workbook = new XSSFWorkbook(is);
 
             Sheet sheet = workbook.getSheet(SHEET);
             Iterator<Row> rows = sheet.iterator();
 
-            List<Car> cars = new ArrayList<Car>();
+            Set<Car> cars = new HashSet<>();
+
+
 
             int rowNumber = 0;
             while (rows.hasNext()) {
@@ -83,28 +99,29 @@ public class ExcelHelper {
                     Cell currentCell = cellsInRow.next();
 
                     switch (cellIdx) {
-                        case 0:
-                            car.setId((long) currentCell.getNumericCellValue());
-                            break;
 
-                        case 1:
+                        case 0:
                             car.setColor(currentCell.getStringCellValue());
                             break;
 
-                        case 2:
+                        case 1:
                             car.setModel(currentCell.getStringCellValue());
                             break;
 
-                        case 3:
+                        case 2:
                             car.setPlate_num(currentCell.getStringCellValue());
                             break;
 
-                        case 4:
+                        case 3:
                             car.setPrice((int) currentCell.getNumericCellValue());
                             break;
 
-                        case 5:
+                        case 4:
                             car.setYear((int) currentCell.getNumericCellValue());
+                            break;
+
+                        case 5:
+                            car.setCategory(Category.valueOf(currentCell.getStringCellValue()));
                             break;
 
                         default:

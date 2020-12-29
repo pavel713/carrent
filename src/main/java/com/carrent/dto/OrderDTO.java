@@ -1,5 +1,6 @@
 package com.carrent.dto;
 
+import com.carrent.dao.entities.Car;
 import com.carrent.dao.entities.Order;
 import com.carrent.dao.entities.User;
 import lombok.AllArgsConstructor;
@@ -20,7 +21,7 @@ public class OrderDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
 
-    private double cost;
+    private long cost;
 
     private User users;
 
@@ -30,6 +31,7 @@ public class OrderDTO {
         this.endDate = order.getEndDate();
         this.cost = order.getCost();
         this.users = order.getUsers();
+
     }
 
     public OrderDTO() {

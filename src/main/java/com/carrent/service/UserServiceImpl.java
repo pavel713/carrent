@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public void save(UserDTO userDto) throws DataAccessException {
+    public UserDTO save(UserDTO userDto) throws DataAccessException {
         try {
             User user = new User(userDto);
             user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -50,16 +50,18 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException("message", e);
 
         }
+        return userDto;
     }
 
     @Override
-    public void delete(Long id) throws DataAccessException {
+    public UserDTO delete(Long id) throws DataAccessException {
         try {
             userRepository.deleteById(id);
         } catch (DataAccessException e) {
             throw new ServiceException("message", e);
         }
 
+        return null;
     }
 
 

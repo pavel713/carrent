@@ -33,22 +33,18 @@ public class Order {
     private Date endDate;
 
     @Column(name = "cost")
-    private double cost;
+    private long cost;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User users;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "car_id")
+    private Car cars;
 
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "order_car",
-            joinColumns = @JoinColumn(name = "order_id"),
-            inverseJoinColumns = @JoinColumn(name = "car_id")
-    )
 
-    private Set<Car> cars;
 
 
     public Order(OrderDTO order) {

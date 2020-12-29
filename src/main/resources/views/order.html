@@ -25,7 +25,7 @@
         </tr>
         </tbody>
 
-        <form action="/order/submit" th:object="${order}" method="post">
+        <form action="/order/submit" th:object="${order}" method="POST">
             <div class="container ml-auto">
                 <label for="start_date" th:text="#{date.begin}"></label>
                 <input type="date" class="form-control is is-valid"  id="start_date" name="startDate">

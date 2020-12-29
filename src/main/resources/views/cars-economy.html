@@ -29,7 +29,9 @@
             <td><span th:text="'$ ' + ${car.price}"></span></td>
             <td><span th:text="${car.year}"></span></td>
             <td><span th:text="${car.category}"></span></td>
-            <input hidden name="carId" th:value="${car.getId()}">
+            <label>
+                <input hidden name="carId" th:value="${car.getId()}">
+            </label>
             <input name="_csrf" th:value="${_csrf.token}" type="hidden"/>
             <td>
                 <form action="order" th:action="@{/order/}">

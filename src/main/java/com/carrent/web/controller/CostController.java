@@ -6,14 +6,11 @@ import com.carrent.service.CarService;
 import com.carrent.service.OrderService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
-@SessionAttributes({"car", "order"})
+@SessionAttributes({"CarDTO", "OrderDTO"})
 public class CostController {
 
     private final OrderService orderService;
@@ -26,14 +23,16 @@ public class CostController {
     }
 
     @GetMapping("/cost")
-    public String showSessionCar(Model model, @RequestParam("car_id") Long carId) {
+    public String showCar(Model model, @RequestParam("car_id") Long carId, OrderDTO order) {
         CarDTO carById = carService.getCarById(carId);
         model.addAttribute("carById", carById);
+        model.addAttribute("order", order);
         return "cost";
     }
 
-    @PostMapping("/cost")
-    public String setFinalCost(OrderDTO order, CarDTO car) {
+    @PostMapping("/cost/{carById}")
+    public String setFinalCost(@RequestBody OrderDTO order, @PathVariable(value = "carById") Long carId) {
+        CarDTO car = carService.getCarById(carId);
         long days = orderService.calculateDateInterval(order.getStartDate(), order.getEndDate());
         order.setCost(car.getPrice() * days);
         orderService.save(order);

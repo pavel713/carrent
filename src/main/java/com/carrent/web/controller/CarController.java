@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/cars")
@@ -35,7 +36,7 @@ public class CarController {
 
     @GetMapping()
     public String findAllCars(Model model) {
-        List<CarDTO> cars = carService.findAll();
+       List<CarDTO> cars = carService.findAll();
         model.addAttribute("carList", cars);
         return "carsList";
     }
@@ -57,9 +58,10 @@ public class CarController {
         if (ExcelHelper.hasExcelFormat(file)) {
             try {
                 excelService.save(file);
+                HttpHeaders headers = new HttpHeaders();
+                headers.add("Location", "/cars");
+                return new ResponseEntity<>(headers, HttpStatus.FOUND);
 
-                message = "Uploaded the file successfully";
-                return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
             } catch (Exception e) {
                 message = "Could not upload the file";
                 return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
@@ -69,7 +71,6 @@ public class CarController {
         message = "Please upload an excel file!";
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
     }
-
 
 
 }

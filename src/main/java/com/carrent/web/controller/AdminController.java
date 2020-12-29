@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/admin")
@@ -41,7 +42,7 @@ public class AdminController {
 
     @GetMapping("/cars")
     public String carListView(Model model) {
-        List<CarDTO> carList = carService.findAll();
+       List<CarDTO> carList = carService.findAll();
         model.addAttribute("carList", carList);
         return "carsList";
     }

@@ -4,12 +4,14 @@ import com.carrent.dao.entities.Order;
 import com.carrent.dao.entities.Role;
 import com.carrent.dao.entities.User;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.Set;
 
 @Data
 @AllArgsConstructor
+@Builder
 public class UserDTO {
 
     private Long id;
