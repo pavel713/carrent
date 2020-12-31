@@ -9,7 +9,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -43,16 +42,14 @@ public class Order {
     @JoinColumn(name = "car_id")
     private Car cars;
 
-
-
-
-
     public Order(OrderDTO order) {
         this.id = order.getId();
         this.startDate = order.getStartDate();
         this.endDate = order.getEndDate();
         this.cost = order.getCost();
         this.users = order.getUsers();
+        this.cars = order.getCar();
+
     }
 }
 

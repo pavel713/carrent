@@ -1,18 +1,18 @@
 package com.carrent.service;
 
+import com.carrent.dao.entities.Car;
 import com.carrent.dao.entities.Order;
 import com.carrent.dao.entities.User;
+import com.carrent.dao.repository.CarRepository;
 import com.carrent.dao.repository.OrderRepository;
-import com.carrent.dao.repository.UserRepository;
+import com.carrent.dto.CarDTO;
 import com.carrent.dto.OrderDTO;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.dao.DataAccessException;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,14 +24,26 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
     private final UserService userService;
+    private final PriceService priceService;
+    private final CarRepository carRepository;
 
     @Override
-    public void save(OrderDTO orderDto) throws DataAccessException {
+    public OrderDTO save(String startDateString, String endDateString, long carId) throws DataAccessException {
         try {
+            Date startDate = new Date(Long.parseLong(startDateString));
+            Date endDate = new Date(Long.parseLong(endDateString));
+            Long price = priceService.calculatePrice(startDate, endDate, carId);
             User currentUserEntity = userService.getCurrentUserEntity();
-            Order order = new Order(orderDto);
+            Car car = carRepository.findCarById(carId);
+            Order order = new Order();
+            order.setStartDate(startDate);
+            order.setEndDate(endDate);
+            order.setCost(price);
+            order.setCars(car);
             order.setUsers(currentUserEntity);
-            orderRepository.save(order);
+
+            Order savedOrder = orderRepository.save(order);
+            return new OrderDTO(savedOrder);
         } catch (DataAccessException e) {
             throw new ServiceException("message", e);
         }
@@ -68,11 +80,6 @@ public class OrderServiceImpl implements OrderService {
         }
 
     }
-
-    public long calculateDateInterval(Date startDate, Date endDate) {
-        return ChronoUnit.DAYS.between(startDate.toInstant(), endDate.toInstant());
-    }
-
 
 }
 

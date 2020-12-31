@@ -2,25 +2,27 @@ package com.carrent.web.controller;
 
 import com.carrent.dto.CarDTO;
 import com.carrent.dto.OrderDTO;
+import com.carrent.dto.UserDTO;
 import com.carrent.service.CarService;
 import com.carrent.service.OrderService;
+import com.carrent.service.UserService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-@SessionAttributes({"CarDTO", "OrderDTO"})
+@RequiredArgsConstructor
 public class CostController {
 
     private final OrderService orderService;
     private final CarService carService;
-
-    public CostController(OrderService orderService, CarService carService) {
-        this.orderService = orderService;
-        this.carService = carService;
-
-    }
+    private final UserService userService;
 
     @GetMapping("/cost")
     public String showCar(Model model, @RequestParam("car_id") Long carId, OrderDTO order) {
@@ -30,15 +32,15 @@ public class CostController {
         return "cost";
     }
 
-    @PostMapping("/cost/{carById}")
-    public String setFinalCost(@RequestBody OrderDTO order, @PathVariable(value = "carById") Long carId) {
-        CarDTO car = carService.getCarById(carId);
-        long days = orderService.calculateDateInterval(order.getStartDate(), order.getEndDate());
-        order.setCost(car.getPrice() * days);
-        orderService.save(order);
-        return "redirect:/result";
-
+    @PostMapping(value = "/cost/{carId}")
+    public String setFinalCost(String startDate, String endDate, @PathVariable Long carId, Model model) {
+        OrderDTO saved = orderService.save(startDate, endDate, carId);
+        UserDTO currentUser = userService.getCurrentUser();
+        CarDTO carById = carService.getCarById(carId);
+        model.addAttribute("user", currentUser);
+        model.addAttribute("order", saved);
+        model.addAttribute("car", carById);
+        return "result";
     }
-
 
 }

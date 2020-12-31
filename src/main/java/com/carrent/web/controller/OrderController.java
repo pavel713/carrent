@@ -4,29 +4,22 @@ import com.carrent.dto.CarDTO;
 import com.carrent.dto.OrderDTO;
 import com.carrent.dto.UserDTO;
 import com.carrent.service.CarService;
-import com.carrent.service.OrderService;
+import com.carrent.service.PriceService;
 import com.carrent.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@SessionAttributes({"carDTO", "orderDTO"})
+@RequiredArgsConstructor
 public class OrderController {
 
     private final CarService carService;
-    private final OrderService orderService;
     private final UserService userService;
-
-
-    public OrderController(CarService carService, OrderService orderService, UserService userService) {
-        this.carService = carService;
-        this.orderService = orderService;
-        this.userService = userService;
-    }
+    private final PriceService priceService;
 
     @ModelAttribute("currentUser")
     public UserDTO getCurrentUser() {
@@ -47,12 +40,13 @@ public class OrderController {
     }
 
 
-    @PostMapping("/order/submit")
-    public String submitOrder(OrderDTO order, RedirectAttributes redirectAttributes,
-                              @RequestParam(value = "car_id") Long CarId) {
-
-        orderService.save(order);
-        redirectAttributes.addAttribute("car_id", CarId);
-        return "redirect:/cost";
+    @PostMapping("/order/{carId}")
+    public String submitOrder(OrderDTO order, @PathVariable Long carId, Model model) {
+        Long price = priceService.calculatePrice(order.getStartDate(), order.getEndDate(), carId);
+        order.setCost(price);
+        CarDTO carById = carService.getCarById(carId);
+        model.addAttribute("carById", carById);
+        model.addAttribute("order", order);
+        return "cost";
     }
 }

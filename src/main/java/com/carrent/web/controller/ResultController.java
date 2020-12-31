@@ -9,10 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
-@SessionAttributes({"carDTO", "orderDTO"})
 public class ResultController {
 
     private final UserService userService;
@@ -25,13 +23,12 @@ public class ResultController {
 
 
     @GetMapping("/result")
-    public String showFinalePage(@RequestParam("car_id") Long carId, Model model, OrderDTO order, CarDTO car) {
+    public String showFinalePage(@RequestParam("car_id") Long carId, Model model, OrderDTO order) {
         UserDTO currentUser = userService.getCurrentUser();
         CarDTO carById = carService.getCarById(carId);
         model.addAttribute("user", currentUser);
         model.addAttribute("order", order);
-        model.addAttribute("carById", carById);
-        model.addAttribute("car", car);
+        model.addAttribute("car", carById);
         return "result";
     }
 

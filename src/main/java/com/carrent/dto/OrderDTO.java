@@ -25,12 +25,15 @@ public class OrderDTO {
 
     private User users;
 
+    private Car car;
+
     public OrderDTO(Order order) {
         this.id = order.getId();
         this.startDate = order.getStartDate();
         this.endDate = order.getEndDate();
         this.cost = order.getCost();
         this.users = order.getUsers();
+        this.car = order.getCars();
 
     }
 

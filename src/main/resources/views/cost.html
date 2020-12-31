@@ -14,18 +14,22 @@
             <th scope="col" th:text="#{car.model}"></th>
             <th scope="col" th:text="#{car.year}"></th>
             <th scope="col" th:text="#{car.price}"></th>
+            <th scope="col">total price</th>
             <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
-            <td><span th:text="${carById.model}"></span></td>
-            <td><span th:text="${carById.year}"></span></td>
-            <td><span th:text="'$ ' + ${carById.price}"></span></td>
+        <td><span th:text="${carById.model}"></span></td>
+        <td><span th:text="${carById.year}"></span></td>
+        <td><span th:text="'$ ' + ${carById.price}"></span></td>
+        <td><span th:text="'$ ' + ${order.cost}"></span></td>
         <td>
-            <form action="/cost" th:object="${order.setCost(carById.id)}" method="post">
+            <form action="/cost" th:action="'/cost/'+${carById.id}" th:object="${order.setCost(carById.id)}"
+                  method="post">
                 <div class="container ml-auto">
-                    <input type="hidden" class="form-control" th:id="carById">
                     <input name="_csrf" th:value="${_csrf.token}" type="hidden"/>
+                    <input name="startDate" th:value="${order.getStartDate().getTime()}" type="hidden"/>
+                    <input name="endDate" th:value="${order.getEndDate().getTime()}" type="hidden"/>
                     <button class="btn btn-primary mt-2" th:text="#{order.submit}" type="submit"></button>
                 </div>
             </form>
