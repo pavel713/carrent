@@ -5,7 +5,6 @@ import com.carrent.dao.entities.Order;
 import com.carrent.dao.entities.User;
 import com.carrent.dao.repository.CarRepository;
 import com.carrent.dao.repository.OrderRepository;
-import com.carrent.dto.CarDTO;
 import com.carrent.dto.OrderDTO;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.service.spi.ServiceException;
